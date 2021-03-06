@@ -12,13 +12,13 @@ entries:
           - title: "4th year thesis: Keap1 cancer mutants; A large-scale molecular dynamics study of protein stability."
           - title: "3rd year project: Investigating a novel protein docking method using the disordered binding partners of CBP."
       
-  - title: Research interests
+  - bold: Research interests
     entries:
       - title: Disrupting protein-protein binding interactions in cancer
       - title: Small molecule and peptide theraputic design
       - title: Miniprotein folding
 
-  - title: Recent publications
+  - bold: Recent publications
     post_list:
       limit: 3
       show_more: true
