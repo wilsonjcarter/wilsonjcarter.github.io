@@ -3,9 +3,9 @@
     <li>
     {%- if item.url -%}
       <a href="{{ item.url }}">{{ item.title }}</a>
-    {%- elif item.title -%}
+    {%- if item.title -%}
       {{ item.title }}
-    {%- else -%}
+    {%- if item.bold -%}
       <b> {{item.bold}} </b>
     {%- endif -%}
     </li>
