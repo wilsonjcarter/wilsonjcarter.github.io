@@ -3,13 +3,16 @@
     <li>
     {%- if item.url -%}
       <a href="{{ item.url }}">{{ item.title }}</a>
+    {%- else -%}
     {%- if item.title -%}
       {{ item.title }}
+    {%- else -%}
     {%- if item.bold -%}
       <b> {{item.bold}} </b>
+    {%- else -%}
     {%- endif -%}
     </li>
-
+    
     {%-if item.post_list-%}
       {%
         include post_list.html
