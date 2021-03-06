@@ -23,12 +23,6 @@
 
     {%-if item.entries-%}
       {%-include menu_item.html collection=item.entries-%}
-    {%-endif-%}
-  
-  
-    {%-if item.btitle-%}
-      <strong> {{item.btitle}} </strong>
-    {%-endif-%}
-  
+    {%-endif-%}  
   {%-endfor-%}
 </ul>
