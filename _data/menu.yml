@@ -6,10 +6,10 @@ entries:
     entries:
       - title: "M.Sc. Applied Mathematics [2021 -- Present]"
         entries:
-          - title: "Supervisors: Dr. Mikko Karttunen (Primary) and Dr. Wing-Yiu Choy (Secondary)"
+          - title: Supervisors + ": "+ <a href='https://wilsonjcarter.github.io/'>Dr. Mikko Karttunen</a> + (Primary) and <a href='https://wilsonjcarter.github.io/'>Dr. Wing-Yiu Choy</a> (Secondary)"
       - title: "BMSc. Computational Biochemistry (Hons) and Applied Mathematics (Maj.) [2016 -- 2021]"
         entries:
-          - title: "4th year thesis: Keap1 cancer mutants; A large-scale molecular dynamics study of protein stability."
+          - title: "4th year thesis: Keap1 cancer mutants: A large-scale molecular dynamics study of protein stability."
           - title: "3rd year project: Investigating a novel protein docking method using the disordered binding partners of CBP."
       
   - bold: Research interests
