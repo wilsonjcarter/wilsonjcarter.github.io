@@ -2,37 +2,25 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
-  - title: info
+  - title: Education
     entries:
-      - title: a (nearly) no-CSS, fast, minimalist Jekyll theme.
-      - title: github repo
-        url: https://github.com/riggraz/no-style-please
-      - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
-
-  - title: all posts
-    post_list:
-      limit: 5
-      show_more: true
-      show_more_text: See archive...
-      show_more_url: archive.html
-
-  - title: posts by category
-    post_list:
-      category: example2
-      show_more: true
-      show_more_text: See more posts...
-      show_more_url: example2-archive.html
-
-  - title: rss
-    url: feed.xml
-  
-  - title: another list
-    entries:
-      - title: with subitems
+      - title: "M.Sc. Applied Mathematics [2021 -- Present]"
         entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
-  - title: PRO TIP
+          - title: "Supervisors: Dr. Mikko Karttunen (Primary) and Dr. Wing-Yiu Choy (Secondary)"
+      - title: "BMSc. Computational Biochemistry (Hons) and Applied Mathematics (Maj.) [2016 -- 2021]"
+        entries:
+          - title: "4th year thesis: Keap1 cancer mutants; A large-scale molecular dynamics study of protein stability."
+          - title: "3rd year project: Investigating a novel protein docking method using the disordered binding partners of CBP."
+      
+  - title: Research interests
     entries:
-      - title: to edit this menu, edit _data/menu.yml file
+      - title: Disrupting protein-protein binding interactions in cancer
+      - title: Small molecule and peptide theraputic design
+      - title: Miniprotein folding
+
+  - title: Recent publications
+    post_list:
+      limit: 3
+      show_more: true
+      show_more_text: More
+      show_more_url: archive.html
