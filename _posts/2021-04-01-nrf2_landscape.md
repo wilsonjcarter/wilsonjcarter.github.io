@@ -1,28 +1,12 @@
 ---
 layout: post
-slug: hr example
----
 
-Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit. Pellentesque vel lacinia neque. Praesent nulla quam, ullamcorper in sollicitudin ac, molestie sed justo. Cras aliquam, sapien id consectetur accumsan, augue magna faucibus ex, ut ultricies turpis tortor vel ante. In at rutrum tellus. Nullam vestibulum metus eu purus malesuada, volutpat mattis leo facilisis. Sed consectetur, nisl et semper laoreet, velit augue congue nunc, eget eleifend odio erat eu sapien. Phasellus dictum efficitur dapibus. Morbi porta lacinia tincidunt. Nam aliquet est mi, nec lacinia ipsum elementum sed. Nam feugiat ipsum tortor, et pretium purus sollicitudin et.
+Title:
+Exploring the conformational landscape of the Neh4 and Neh5 domains of Nrf2 using two different force fields and circular dichroism.
 
----
+Authors:
+Megan Chang*, Carter J. Wilson*, Nadun Chanaka Karunatilleke, Mohamed Hesham Moselhy, Mikko Karttunen, Wing-Yiu Choy
 
-Mauris viverra dictum ultricies[^2]. Vestibulum[^3] quis ipsum euismod, facilisis metus sed, varius ipsum. Donec scelerisque lacus libero, eu dignissim sem venenatis at. Nunc a egestas tortor, sed feugiat leo. Vestibulum porta tincidunt tellus, vitae ornare tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nunc neque, tempor in iaculis non, faucibus et metus. Etiam id nisl ut lorem gravida euismod.
 
-Fusce non velit cursus ligula mattis convallis vel at metus. Sed pharetra tellus massa, non elementum eros vulputate non. Suspendisse potenti. Quisque arcu felis, laoreet vel accumsan sit amet, fermentum at nunc. Sed massa quam, auctor in eros quis, porttitor tincidunt orci. Nulla convallis id sapien ornare viverra. Cras nec est lacinia ligula porta tincidunt. Nam a est eget ligula pellentesque posuere. Maecenas quis enim ac risus accumsan scelerisque. Aliquam vitae libero sapien. Etiam convallis, metus nec suscipit condimentum, quam massa congue velit, sit amet sollicitudin nisi tortor a lectus. Cras a arcu enim. Suspendisse hendrerit euismod est ac gravida. Donec vitae elit tristique, suscipit eros at, aliquam augue. In ac faucibus dui. Sed tempor lacus tristique elit sagittis, vitae tempor massa convallis.
-
----
-{: data-content="discussions"}
-
-This article has been discussed here:
-- [lobste.rs](#)
-- [/r/webdev](#)
-
-Feel free to reach out at my email to leave feedback and talk about the article.
-
----
-{: data-content="footnotes"}
-
-[^1]: Okay here I should put something about "ipsum".
-[^2]: same goes for this.
-[^3]: I studied latin in high school but im not able to translate *anything*! By the way this is a longer footnote and i think it is still pretty cool, even prettier than shortier ones even though it does not say anything useful but whatever.
+Abstract:
+  The Nrf2-ARE transcriptional response pathway plays a critical role in protecting the cell from oxidative stresses via the upregulation of cytoprotective genes. Aberrant activation of Nrf2 in cancer cells can confer this cytoprotectivity thereby reducing the efficacy of both chemotherapeutics and radiotherapies. Key to this antioxidant pathway is the interaction between Nrf2 and CBP, mediated by the Neh4 and Neh5 domains of Nrf2. Disruption of this interaction via small molecule therapeutics could negate the effects of aberrant Nrf2 upregulation. Due to the disordered nature of these domains there remains no three-dimensional structure of Neh4 or Neh5, making structure-based drug design a challenge. Here we performed 48\,$\mu$s of unbiased molecular dynamics (MD) simulations with the Amber99SB*-ILDNP and CHARMM36m force fields and circular dichroism (CD) spectropolarimetry experiments in order to elucidate the free-state structures of these domains; no previous data regarding their conformational landscapes exists. The two main findings are the following: We find Neh5 to be markedly more disordered than Neh4, which shows a propensity to form a 9-residue $\alpha$-helix in the middle of the domain. Thus, pointing to Neh4 and Neh5 having different binding mechanisms. Second, the two force fields show strong differences for the glutamic acid-rich Neh5 peptide but are in reasonable agreement for Neh4 which has no glutamic acid. The CHARMM36m force field agrees most closely with the CD results.
