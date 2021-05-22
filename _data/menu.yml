@@ -13,8 +13,6 @@ entries:
           - title: The University of Western Ontario 
           - title: "4th year thesis: Keap1 cancer mutants: A large-scale molecular dynamics study of protein stability."
           - title: "3rd year project: Investigating a novel protein docking method using the disordered binding partners of CBP."
-          - title: Western Scholar
-          - title: Graduation with Distinction
       
   - bold: Research interests
     entries:
@@ -32,5 +30,7 @@ entries:
   - bold: Awards
     entries:
       - title: NSERC Graduate Scholarship [2021 -- 2022]
-      - title: Dean's Honours List [2016 -- 2020]
+      - title: Western Scholar [2021]
+      - title: Graduation with Distinction [2021]
+      - title: Dean's Honours List [2016 -- 2021]
       - title: Western Scholarship of Excellence [2016]
