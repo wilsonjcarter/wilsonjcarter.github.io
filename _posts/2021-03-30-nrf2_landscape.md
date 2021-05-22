@@ -3,7 +3,7 @@ layout: post
 ---
 
 <b>Title:</b>
-<a href="https://pubs.acs.org/doi/10.1021/acs.jctc.0c01243">Exploring the conformational landscape of the Neh4 and Neh5 domains of Nrf2 using two different force fields and circular dichroism</a>.
+<a href="https://doi.org/10.1021/acs.jctc.0c01243">Exploring the conformational landscape of the Neh4 and Neh5 domains of Nrf2 using two different force fields and circular dichroism</a>.
 
 <b>Authors:</b>
 Megan Chang\*, Carter J. Wilson\*, Nadun Chanaka Karunatilleke, Mohamed Hesham Moselhy, Mikko Karttunen, Wing-Yiu Choy
