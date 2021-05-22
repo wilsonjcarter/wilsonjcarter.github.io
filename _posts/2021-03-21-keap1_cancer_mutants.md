@@ -3,7 +3,7 @@ layout: post
 ---
 
 <b>Title:</b>
-<a href="https://doi.org/10.3390/ijms22105408"> KEAP1 cancer mutants: A large-scale molecular dynamics study of protein stability.</a>
+<a href="https://doi.org/10.3390/ijms22105408"> KEAP1 cancer mutants: A large-scale molecular dynamics study of protein stability</a>.
 
 <b>Authors:</b>
 Carter J. Wilson, Megan Chang, Mikko Karttunen, Wing-Yiu Choy
