@@ -2,7 +2,7 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
-  - bold: <a href="files/cv2022.pdf" download="carterjwilson_cv2022.pdf"> Download CV</a>
+  - bold: <a href="cv2022.pdf" download="carterjwilson_cv2022.pdf"> Download CV</a>
   - bold: Education
     entries:
       - title: "MSc. Applied Mathematics [2021 -- Present]"
