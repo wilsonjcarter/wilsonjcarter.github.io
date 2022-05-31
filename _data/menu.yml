@@ -2,6 +2,7 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
+  - bold: <a href="files/cv2022.pdf" Download CV >
   - bold: Education
     entries:
       - title: "MSc. Applied Mathematics [2021 -- Present]"
@@ -17,7 +18,7 @@ entries:
       
   - bold: Research interests
     entries:
-      - title: Disrupting protein-protein binding interactions in cancer
+      - title: Free energies of amino acid mutations in cancer pathways
       - title: Small molecule and peptide therapeutic design
       - title: Miniprotein folding
 
@@ -48,3 +49,4 @@ entries:
       - title: <a href='https://ca.linkedin.com/in/wilsonjcarter'>LinkedIn</a>
       - title: <a href='https://www.twitter.com/wilsonjcarter'>Twitter</a>
       - title: <a href='https://www.facebook.com/wilsonjcarter'>Facebook</a>
+ 
