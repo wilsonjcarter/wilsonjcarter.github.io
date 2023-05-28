@@ -6,7 +6,9 @@ entries:
   - bold: Education
     entries:
       - title: "PhD. Physics [2023 -- ]"
+        entries:
           - title: <a href='https://www.uni-goettingen.de/en/about+us/58765.html'>GGNB, University of Göttingen</a>, Göttingen, Germany
+          - title: Supervisors <a href='http://www3.mpibpc.mpg.de/groups/de_groot/bgroot.html'>Dr. Bert L. de Groot</a>
       - title: "MSc. Applied Mathematics [2021 -- 2023]"
         entries:
           - title: <a href='https://www.uwo.ca/'>The University of Western Ontario</a>, London, Canada
