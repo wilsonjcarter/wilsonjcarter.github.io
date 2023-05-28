@@ -5,10 +5,13 @@ entries:
   - bold: <a href="cv2022.pdf" download="carterjwilson_cv2022.pdf"> Download CV</a>
   - bold: Education
     entries:
-      - title: "MSc. Applied Mathematics [2021 -- Present]"
+      - title: "PhD. Physics [2023 -- ]"
+          - title: <a href='https://www.uni-goettingen.de/en/about+us/58765.html'>GGNB, University of Göttingen</a>, Göttingen, Germany
+      - title: "MSc. Applied Mathematics [2021 -- 2023]"
         entries:
           - title: <a href='https://www.uwo.ca/'>The University of Western Ontario</a>, London, Canada
           - title: Supervisors <a href='https://softsimu.net/mikko/'>Dr. Mikko Karttunen</a> and <a href='https://publish.uwo.ca/~jchoy4/choy/Contact.html'>Dr. Wing-Yiu Choy</a>
+          - title: "Thesis: A Highly Charged Topic: Intrinsically Disordered Proteins and Protein pKa Values."
           - title: Research trip at the <a href='https://www.mpinat.mpg.de/en'>Max Planck Institute for Multidisciplinary Studies</a> (<a href='https://www.mpinat.mpg.de/degroot'>de Groot group</a>), Göttingen, Germany [May -- Nov. 2022]
       - title: "BMSc. Computational Biochemistry (Hons) and BSc. Applied Mathematics (Maj.) [2016 -- 2021]"
         entries:
@@ -18,7 +21,7 @@ entries:
       
   - bold: Research interests
     entries:
-      - title: Free energies of amino acid mutations in cancer pathways
+      - title: Non-equilibirum free energy calculations
       - title: Small molecule and peptide therapeutic design
       - title: Miniprotein folding
 
