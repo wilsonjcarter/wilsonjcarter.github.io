@@ -24,8 +24,8 @@ entries:
   - bold: Research interests
     entries:
       - title: Non-equilibirum free energy calculations
-      - title: Small molecule and peptide therapeutic design
-      - title: Miniprotein folding
+      - title: Covalent inhibitor design
+      - title: Aquaporin dynamics
 
   - bold: Recent publications
     post_list:
