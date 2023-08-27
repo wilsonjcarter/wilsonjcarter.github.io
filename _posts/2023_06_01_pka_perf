@@ -1,0 +1,14 @@
+---
+layout: post
+---
+
+<b>Title:</b>
+<a href="https://doi.org/10.26434/chemrxiv-2023-pqjrf-v2"> Accurately predicting protein pKa values using non-equilibrium alchemy</a>.
+
+<b>Authors:</b>
+    Carter J. Wilson,Mikko Karttunen, Bert L. de Groot, and Vytautas Gapsys 
+
+\* = equal contribution
+
+<b>Abstract:</b>
+  The stability, solubility, and function of a protein depend both on its net charge and the protonation states of its individual residues. pKa is a measure of the tendency for a given residue to (de)protonate at a specific pH. Although pKa values can be resolved experimentally, theory and computation provide a compelling alternative. To this end, we assess the applicability of a non-equilibrium (NEQ) alchemical free energy method to the problem of pKa prediction. On a dataset of 144 residues that span 13 proteins, we report an average unsigned error of 0.77 ± 0.09 pK, 0.69 ± 0.09 pK, and 0.52 ± 0.04 pK for aspartate, glutamate, and lysine, respectively. This is comparable to current state-of-the-art predictors and the accuracy recently reached using free energy perturbation methods (e.g., FEP+). Moreover, we demonstrate that our open-source, pmx-based approach can accurately resolve the pKa values of coupled residues and observe a substantial performance disparity associated with the lysine partial charges in Amber14SB/Amber99SB*-ILDN, for which an underused fix already exists.
