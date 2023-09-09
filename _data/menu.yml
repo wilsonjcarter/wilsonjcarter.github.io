@@ -2,7 +2,7 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
-  - bold: <a href="cv2022.pdf" download="carterjwilson_cv2022.pdf"> Download CV</a>
+  - bold: <a href="short_resume_cwilson_sept_2023.pdf" download="carterjwilson_cv2023.pdf"> Download CV</a>
   - bold: Education
     entries:
       - title: "PhD. Physics [2023 -- ]"
