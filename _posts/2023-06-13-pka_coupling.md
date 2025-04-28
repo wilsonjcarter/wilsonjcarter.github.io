@@ -3,7 +3,7 @@ layout: post
 ---
 
 <b>Title:</b>
-<a href="https://doi.org/10.26434/chemrxiv-2023-pqjrf-v2">Resolving coupled pH titrations using alchemical free energy calculations</a>.
+<a href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.27318">Resolving coupled pH titrations using alchemical free energy calculations</a>.
 
 <b>Authors:</b>
     Carter J. Wilson, Bert L. de Groot, and Vytautas Gapsys 
