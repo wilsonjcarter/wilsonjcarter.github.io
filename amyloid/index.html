@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/3dmol@2.4.2/build/3Dmol-min.js"></script>
 <style>
 :root{
-  --bg:#F7F6F2; --surface:#FFFFFF; --sunk:#EEEDE7; --ink:#1C1C21; --muted:#5F5F68; --line:#DCDAD2;
+  --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#F3F3F4; --ink:#111113; --muted:#5E5E66; --line:#DEDEE2;
   /* --congo = fibril colour (burnt orange), --steel = highlight colour (cobalt) */
   --congo:#C95F24; --apple:#2E8A57; --steel:#2451C2; --amber:#B7791F;
   --pf0:var(--congo); --pf1:var(--steel);
@@ -23,13 +23,13 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#121316; --surface:#1A1B1F; --sunk:#212328; --ink:#E8E8EC; --muted:#A0A0AA; --line:#2D2F35;
+    --bg:#000000; --surface:#0C0C0E; --sunk:#18181B; --ink:#EDEDF0; --muted:#A0A0AA; --line:#2B2B30;
     --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#121316; --surface:#1A1B1F; --sunk:#212328; --ink:#E8E8EC; --muted:#A0A0AA; --line:#2D2F35;
+  --bg:#000000; --surface:#0C0C0E; --sunk:#18181B; --ink:#EDEDF0; --muted:#A0A0AA; --line:#2B2B30;
   --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55;
 }
 *{box-sizing:border-box}
