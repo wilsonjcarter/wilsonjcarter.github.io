@@ -357,6 +357,23 @@ footer .mono{font-size:12px}
       <p>Fibres are far too small for a light microscope, so we freeze them in a thin film of glass-like ice and photograph them with electrons. The catch is that electrons destroy protein, so each picture uses a very low dose and comes out extremely noisy.</p>
       <p>The trick is averaging. A fibre is the same all the way along, so we cut every picture into thousands of short segments, line them up, and average. The noise cancels out and the structure remains. Try it with the fibre from section 1.</p>
     </div>
+    <details class="primer" id="primer-em" style="margin:0">
+      <summary><span>New to cryo-EM? Start here</span><span class="mono small muted">how the pictures are taken</span></summary>
+      <div class="primer-body">
+        <div class="prose stack" style="padding-top:18px">
+          <p>Before any averaging, someone has to freeze the sample and photograph it. The experiment has four steps. A top-end cryo-electron microscope is about as tall as a room and sits on its own vibration-damped floor.</p>
+        </div>
+        <div class="figure">
+          <div class="schem-grid">
+            <figure><svg id="em-p0" viewBox="0 0 250 240" role="img" aria-label="A drop of sample placed on a small metal grid"></svg><figcaption><span class="n">1 · Prepare</span><p>A tiny drop (about 3 µL) of fibres goes onto a 3 mm metal grid covered in a thin film full of holes.</p></figcaption></figure>
+            <figure><svg id="em-p1" viewBox="0 0 250 240" role="img" aria-label="Tweezers plunging the grid into liquid ethane"></svg><figcaption><span class="n">2 · Freeze</span><p>Excess liquid is blotted away and the grid is plunged into liquid ethane at about −180 °C. The water freezes so fast that it turns into glass-like ice instead of crystals.</p></figcaption></figure>
+            <figure><svg id="em-p2" viewBox="0 0 250 240" role="img" aria-label="Microscope column: electron source, lenses, sample and camera"></svg><figcaption><span class="n">3 · Image</span><p>Inside the microscope, a beam of electrons accelerated to 300,000 volts passes through the ice. The column is under vacuum and kept cold, and lenses magnify the image onto a camera.</p></figcaption></figure>
+            <figure><svg id="em-p3" viewBox="0 0 250 240" role="img" aria-label="A stack of noisy movie frames summed into one image"></svg><figcaption><span class="n">4 · Record</span><p>Each picture is a short movie of about 40 frames, so any drift can be corrected before the frames are added up. Thousands of movies are collected over a day or two.</p></figcaption></figure>
+          </div>
+        </div>
+        <p class="prose muted small">From there, the computer takes over: finding the fibres in every picture, cutting them into segments and averaging, as in the demo below.</p>
+      </div>
+    </details>
     <div class="figure">
       <div class="em">
         <figure><canvas id="em-clean" width="128" height="88"></canvas><figcaption>What is really there<br>(side-on projection)</figcaption></figure>
@@ -1053,6 +1070,53 @@ function initPrimer() {
   document.getElementById('primer').addEventListener('toggle', () => { drawLand(); if (document.getElementById('primer').open) initIdp(); });
 }
 
+
+/* ---------- Cryo-EM primer schematic ---------- */
+function rng(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+function drawEmPrimer() {
+  const L = (x1, y1, x2, y2, c = 'var(--muted)', w = 2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+  const T = (x, y, t, a = 'middle') => `<text x="${x}" y="${y}" text-anchor="${a}" class="svgl">${t}</text>`;
+  const defs = i => `<defs><marker id="emah${i}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>`;
+  // 1 · grid with a drop
+  let h = `<defs><clipPath id="emclip"><circle cx="125" cy="160" r="52"/></clipPath></defs>`;
+  h += `<rect x="116" y="8" width="18" height="46" rx="3" fill="var(--sunk)" stroke="var(--muted)" stroke-width="1.5"/><path d="M116 54 L134 54 L127 78 L123 78 Z" fill="var(--sunk)" stroke="var(--muted)" stroke-width="1.5"/>`;
+  h += `<circle cx="125" cy="92" r="6" fill="var(--steel)" opacity="0.8"/>`;
+  h += `<circle cx="125" cy="160" r="54" fill="var(--sunk)" stroke="var(--ink)" stroke-width="2"/><g clip-path="url(#emclip)">`;
+  for (let k = 0; k < 11; k++) { const o = 70 + k * 10; h += L(o + 5, 100, o + 5, 220, 'var(--muted)', 1.2) + L(65, o + 40, 185, o + 40, 'var(--muted)', 1.2); }
+  h += `</g>` + T(125, 234, '3 mm grid');
+  document.getElementById('em-p0').innerHTML = h;
+  // 2 · plunge into liquid ethane
+  h = defs(1) + L(78, 8, 121, 96, 'var(--ink)', 2.5) + L(90, 8, 127, 96, 'var(--ink)', 2.5) + L(116, 100, 134, 100, 'var(--steel)', 3);
+  h += `<line x1="160" y1="70" x2="160" y2="140" stroke="var(--ink)" stroke-width="1.6" marker-end="url(#emah1)"/>`;
+  h += `<path d="M60 150 L60 210 Q60 218 68 218 L182 218 Q190 218 190 210 L190 150" fill="none" stroke="var(--muted)" stroke-width="2"/>`;
+  h += `<rect x="62" y="162" width="126" height="54" fill="var(--steel)" opacity="0.18"/>`;
+  h += T(125, 196, '−180 °C') + T(125, 236, 'liquid ethane');
+  document.getElementById('em-p1').innerHTML = h;
+  // 3 · microscope column
+  h = `<rect x="95" y="6" width="60" height="212" rx="10" fill="var(--sunk)" stroke="var(--muted)" stroke-width="1.5"/>`;
+  h += `<path d="M115 14 L135 14 L125 32 Z" fill="var(--ink)"/>`;
+  h += `<path d="M125 32 L110 62 L125 110 L140 62 Z" fill="var(--steel)" opacity="0.18"/><path d="M125 110 L112 158 L125 196 L138 158 Z" fill="var(--steel)" opacity="0.18"/>`;
+  h += `<ellipse cx="125" cy="62" rx="26" ry="7" fill="none" stroke="var(--ink)" stroke-width="2"/><ellipse cx="125" cy="158" rx="26" ry="7" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
+  h += `<rect x="103" y="107" width="44" height="6" rx="2" fill="var(--congo)"/>`;
+  h += `<rect x="103" y="198" width="44" height="12" rx="2" fill="var(--ink)"/>`;
+  h += T(88, 28, 'source', 'end') + T(162, 67, 'lens', 'start') + T(88, 116, 'sample', 'end') + T(162, 163, 'lens', 'start') + T(88, 210, 'camera', 'end');
+  h += T(125, 236, '≈ room-sized');
+  document.getElementById('em-p2').innerHTML = h;
+  // 4 · movie frames summed
+  const rnd = rng(11); h = defs(3);
+  for (let f = 3; f >= 0; f--) {
+    const x = 34 + f * 12, y = 20 + (3 - f) * 12;
+    h += `<rect x="${x}" y="${y}" width="100" height="84" fill="var(--sunk)" stroke="var(--muted)" stroke-width="1.2"/>`;
+    if (f === 0) for (let k = 0; k < 160; k++) h += `<circle cx="${(x + 4 + rnd() * 92).toFixed(1)}" cy="${(y + 4 + rnd() * 76).toFixed(1)}" r="1.2" fill="var(--muted)" opacity="0.7"/>`;
+  }
+  h += T(214, 40, '≈40', 'middle') + T(214, 58, 'frames', 'middle');
+  h += `<line x1="84" y1="136" x2="84" y2="162" stroke="var(--ink)" stroke-width="1.6" marker-end="url(#emah3)"/>`;
+  h += `<rect x="34" y="168" width="100" height="50" fill="var(--sunk)" stroke="var(--ink)" stroke-width="1.5"/>`;
+  h += `<rect x="44" y="187" width="80" height="12" rx="3" fill="var(--congo)" opacity="0.55"/>`;
+  h += T(196, 190, 'one', 'middle') + T(196, 208, 'image', 'middle');
+  document.getElementById('em-p3').innerHTML = h;
+}
+
 /* ---------- Boot ---------- */
 function recolorAll() { styleHero(); styleFold(); selectPtm(ptm.sel); styleAtlas(); crDraw(); drawLand(); idpStyle(false); }
 function boot() {
@@ -1064,6 +1128,7 @@ function boot() {
   initEM();
   initCompute();
   initPrimer();
+  drawEmPrimer();
   if (typeof $3Dmol !== 'undefined') {
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolorAll);
     new MutationObserver(recolorAll).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
