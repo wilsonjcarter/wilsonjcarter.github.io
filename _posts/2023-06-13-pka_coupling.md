@@ -1,5 +1,6 @@
 ---
 layout: post
+title: "Resolving coupled pH titrations using alchemical free energy calculations"
 ---
 
 <b>Title:</b>

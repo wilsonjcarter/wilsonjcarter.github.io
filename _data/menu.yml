@@ -3,18 +3,29 @@
 
 entries:
   - bold: <a href="short_resume_cwilson_jan2026.pdf" download="carterjwilson_cv2026.pdf"> Download CV</a>
+  - bold: About
+    entries:
+      - title: "Computational biophysicist in Bert de Groot's group at MPI-NAT, Göttingen. I develop alchemical free energy methods (pmx) for the covalent chemistry of proteins (protonation, disulfide bonds and post-translational modifications) and apply them to aquaporins, disordered proteins and amyloid. Next: combining computational PTM thermodynamics with cryo-EM of amyloid fibrils."
+
+  - bold: Current position
+    entries:
+      - title: "Postdoctoral researcher [2026 -- ]"
+        entries:
+          - title: <a href='https://www.mpinat.mpg.de/degroot'>Computational Biomolecular Dynamics (de Groot group)</a>, MPI for Multidisciplinary Sciences, Göttingen, Germany
+
   - bold: Education
     entries:
-      - title: "PhD. Biophysics [2023 -- ]"
+      - title: "PhD. Biophysics [2023 -- 2026]"
         entries:
           - title: <a href='https://www.uni-goettingen.de/en/about+us/58765.html'>GGNB, University of Göttingen</a>, Göttingen, Germany
-          - title: Supervisors <a href='http://www3.mpibpc.mpg.de/groups/de_groot/bgroot.html'>Dr. Bert L. de Groot</a>
+          - title: Supervisor <a href='https://www.mpinat.mpg.de/degroot'>Dr. Bert L. de Groot</a>
+          - title: "Thesis: Making Permanent Impressions (defended July 2026)."
       - title: "MSc. Applied Mathematics [2021 -- 2023]"
         entries:
           - title: <a href='https://www.uwo.ca/'>The University of Western Ontario</a>, London, Canada
           - title: Supervisors <a href='https://softsimu.net/mikko/'>Dr. Mikko Karttunen</a> and <a href='https://publish.uwo.ca/~jchoy4/choy/Contact.html'>Dr. Wing-Yiu Choy</a>
           - title: "Thesis: A Highly Charged Topic: Intrinsically Disordered Proteins and Protein pKa Values."
-          - title: Research trip at the <a href='https://www.mpinat.mpg.de/en'>Max Planck Institute for Multidisciplinary Studies</a> (<a href='https://www.mpinat.mpg.de/degroot'>de Groot group</a>), Göttingen, Germany [May -- Nov. 2022]
+          - title: Research trip at the <a href='https://www.mpinat.mpg.de/en'>Max Planck Institute for Multidisciplinary Sciences</a> (<a href='https://www.mpinat.mpg.de/degroot'>de Groot group</a>), Göttingen, Germany [May -- Nov. 2022]
       - title: "BMSc. Computational Biochemistry (Hons) and BSc. Applied Mathematics (Maj.) [2016 -- 2021]"
         entries:
           - title: <a href='https://www.uwo.ca/'>The University of Western Ontario</a>, London, Canada
@@ -23,9 +34,10 @@ entries:
       
   - bold: Research interests
     entries:
-      - title: Non-equilibirum free energy calculations
-      - title: Covalent inhibitor design
-      - title: Aquaporin dynamics
+      - title: Alchemical free energy calculations for covalent protein chemistry (protonation, disulfides, PTMs)
+      - title: Aquaporin gating and selectivity
+      - title: Amyloid structure and post-translational modifications
+      - title: Coarse-grained modelling of the kinetochore–microtubule interface
 
   - bold: Recent publications
     post_list:
@@ -34,6 +46,10 @@ entries:
       show_more_text: More
       show_more_url: archive.html
      
+  - bold: Outreach
+    entries:
+      - title: <a href='amyloid/'>Amyloid, Up Close</a> — an interactive guide to amyloid fibrils for non-scientists
+
   - bold: Awards
     entries:
       - title: NSERC Graduate Scholarship [2025 -- 2027]

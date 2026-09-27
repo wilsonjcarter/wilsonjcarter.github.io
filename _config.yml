@@ -4,7 +4,7 @@ email: cwilson@mpinat.mpg.de # email of site's author
 url: https://wilsonjcarter.github.io/ # root address of the site
 #baseurl: "/no-style-please" # subpath of the site, e.g. "/blog"
 description: > # description of the site (multiple lines allowed)
-  A (nearly) no-CSS, fast, minimalist Jekyll theme.
+  Carter J. Wilson, computational biophysicist at MPI-NAT Göttingen: alchemical free energy calculations, aquaporins and amyloid.
 
 permalink: /:slug.html
 
