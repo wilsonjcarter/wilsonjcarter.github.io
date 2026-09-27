@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="An interactive guide to amyloid fibrils for non-scientists: 3D structures, chemical modifications, disease and cryo-EM.">
+<meta name="description" content="An interactive guide to amyloid fibrils for non-scientists: 3D structures, chemical modifications, disease, cryo-EM and simulation.">
 <link rel="icon" href="/icon5.png">
 <title>Amyloid, Up Close</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,6 +74,8 @@ section{padding-block:72px 8px;display:grid;gap:28px}
 .panel-text{display:grid;gap:14px;padding:22px}
 .tag{font:500 12px/1 var(--mono);color:var(--muted);border:1px solid var(--line);padding:5px 8px;border-radius:6px;justify-self:start}
 .overlay{position:absolute;inset:auto 12px 12px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--muted)}
+.hero-note{font:12px/1 var(--mono);color:var(--muted);align-self:center;margin-left:auto}
+.hero-note i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--congo);margin-right:6px;vertical-align:-1px}
 .legend{position:absolute;top:12px;left:12px;display:flex;gap:12px;font:12px/1 var(--mono);color:var(--muted);flex-wrap:wrap}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 /* sequence map */
@@ -170,7 +172,7 @@ footer .mono{font-size:12px}
       <div class="controls" role="group" aria-label="Fibril view">
         <button data-hero="side" aria-pressed="true">Side view</button>
         <button data-hero="down" aria-pressed="false">Look down the fibre</button>
-        <button data-hero="layer" aria-pressed="false">Pick out one protein</button>
+        <span class="hero-note"><i></i>one protein, at the growing end</span>
       </div>
       <div class="scale">
         <div><strong>0.48 nm</strong><span>between layers</span></div>
@@ -185,7 +187,7 @@ footer .mono{font-size:12px}
       <div class="eyebrow"><b>1</b> Scale · one protein, 0.48 nm thick</div>
       <h2>A fibre made of flattened proteins</h2>
       <p>Most proteins fold into a compact, specific shape and do one job. α-synuclein, the protein in the model above, is different: in a healthy nerve cell it has no fixed shape at all and floats around as a flexible chain.</p>
-      <p>Occasionally, copies of it lie down flat, one exactly on top of the next, like sheets of paper in a ream. Each new layer is held to the one below by a zipper of hydrogen bonds. The result is a fibre thousands of layers long that cells find very hard to break down. Press <em>Pick out one protein</em> above to see a single copy in the stack.</p>
+      <p>Occasionally, copies of it lie down flat, one exactly on top of the next, like sheets of paper in a ream. Each new layer is held to the one below by a zipper of hydrogen bonds. The result is a fibre thousands of layers long that cells find very hard to break down. The protein highlighted in red above is the last layer at one end of the fibre, the spot where the next copy would join.</p>
     </div>
   </section>
 
@@ -304,9 +306,42 @@ footer .mono{font-size:12px}
     </div>
   </section>
 
+<section id="compute">
+    <div class="prose stack">
+      <div class="eyebrow"><b>7</b> Scale · 2 femtoseconds per step</div>
+      <h2>What the microscope can't see</h2>
+      <p>Cryo-EM gives a sharp snapshot of the fibre, but it can't say how a change to the protein would affect its stability. For that we turn to computer simulation, which is my own field. A molecular dynamics simulation follows every atom, updating their positions every two femtoseconds (two millionths of a billionth of a second), for millions of steps.</p>
+    </div>
+
+    <div class="prose stack">
+      <h3>Computational alchemy</h3>
+      <p>Would adding a phosphate to serine 87 make the fibre more or less stable? Measuring that directly would mean simulating fibres falling apart, which takes far too long. Instead we cheat: in the computer, we slowly turn the serine into a phosphoserine, once in the loose protein and once inside the fibre, and measure the work it takes each time. Atoms appearing out of nothing is impossible in reality but perfectly fine in a simulation, which is why this is called alchemy.</p>
+    </div>
+    <div class="figure">
+      <div class="two" style="gap:0">
+        <div style="border-right:1px solid var(--line);padding:12px"><svg id="cycle" viewBox="0 0 520 344" role="img" aria-label="Thermodynamic cycle linking the two alchemical transformations to the change in fibril stability" style="width:100%;height:auto;display:block"></svg></div>
+        <div class="panel-text">
+          <svg id="morph" viewBox="0 0 440 170" role="img" aria-label="Serine side chain morphing into phosphoserine" style="width:100%;height:auto;display:block"></svg>
+          <label for="lam" class="mono small" style="display:grid;gap:6px">λ (how far the change has gone) <output id="lam-out" style="color:var(--ink)">0.00 · serine</output><input type="range" id="lam" min="0" max="1" step="0.01" value="0"></label>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--line)"><canvas id="crooks" aria-label="Histograms of work from forward and reverse transformations"></canvas></div>
+      <div class="readouts">
+        <span>Switches run <strong id="cr-n">0</strong></span>
+        <span>ΔG in the fibre <strong id="cr-g">–</strong></span>
+        <span>ΔΔG (fibre − loose) <strong id="cr-dd">–</strong></span>
+      </div>
+      <div class="controls">
+        <button id="cr-run">Run 10 more switches</button>
+        <button id="cr-reset">Start over</button>
+      </div>
+    </div>
+    <p class="prose muted small">Each switch is a short simulation that forces the change in a fraction of a nanosecond, so every run costs a slightly different amount of work (red: serine → phosphoserine; blue: the reverse, sign flipped). A result from statistical physics, the Crooks theorem, says the free energy change ΔG sits where the two distributions cross, even though no single fast switch is at equilibrium. With a few runs the estimate wobbles; with more it settles. Doing the same in the loose protein and subtracting gives ΔΔG; a positive value means the tag destabilises the fibre. The numbers here are illustrative, not results from a real calculation.</p>
+  </section>
+
   <footer>
     <p>Made by Carter J. Wilson, computational biophysicist. My PhD work built computer methods for predicting how chemical changes like the tags in section 3 affect protein stability.</p>
-    <p class="mono">Structures: PDB 6CU7 (Li et al., 2018), 6XYO (Schweighauser et al., 2020), 8A9L (Yang et al., 2022), and the atlas entries as cited there. Coordinates embedded from the RCSB Protein Data Bank. Viewer: 3Dmol.js. Simulation and projections are simplified illustrations, not quantitative models.</p>
+    <p class="mono">Structures: PDB 6CU7 (Li et al., 2018), 6XYO (Schweighauser et al., 2020), 8A9L (Yang et al., 2022), and the atlas entries as cited there. Coordinates embedded from the RCSB Protein Data Bank. Viewer: 3Dmol.js. Projections, curves and free energy numbers are simplified illustrations, not results from real calculations.</p>
   </footer>
 </div>
 
@@ -349,56 +384,40 @@ function makeViewer(el, extra = {}) {
 function chainsWhere(info, pred) { const r = Object.keys(info).filter(c => pred(info[c])); return r.length ? r : ['#']; }
 
 /* ---------- Hero fibril ---------- */
+// One highlighted protein (the top layer of one protofilament) on a faint 30-layer stack.
 const hero = {mode: 'side'};
+const HERO_N = 30, HERO_TOP = HERO_N - 1 - Math.floor(HERO_N / 2); // top end layer (max z)
 function initHero() {
   const el = document.getElementById('v-hero');
   hero.v = makeViewer(el, {orthographic: true});
-  hero.models = [];
-  // 3 blocks of 20 layers = 60 layers (~28 nm). Backbone only, except the middle layer.
-  const blocks = 3, per = 20, total = blocks * per;
-  for (let b = 0; b < blocks; b++) {
-    const s = S['6CU7'], tw = s.twist, rise = s.rise;
-    const kStart = b * per - total / 2;
-    const {pdb, chainInfo} = buildStack('6CU7', per, (a, k) => BACKBONE.has(a[0]) || (k + kStart + per / 2 === 0));
-    const m = hero.v.addModel(pdb, 'pdb');
-    // shift/rotate block into place: block centred at layer kStart+per/2
-    const kc = kStart + Math.floor(per / 2), ang = kc * tw * Math.PI / 180, c = Math.cos(ang), sn = Math.sin(ang);
-    m.selectedAtoms({}).forEach(at => { const x = at.x, y = at.y; at.x = c * x - sn * y; at.y = sn * x + c * y; at.z += kc * rise; });
-    hero.models.push({m, chainInfo, kc});
-  }
-  hero.v.zoomTo();
+  const isHi = (a, k) => k === HERO_TOP && a[3] === 0;
+  const st = buildStack('6CU7', HERO_N, (a, k) => BACKBONE.has(a[0]) && !isHi(a, k));
+  hero.stack = hero.v.addModel(st.pdb, 'pdb'); hero.stackInfo = st.chainInfo;
+  hero.hi = hero.v.addModel(buildStack('6CU7', HERO_N, isHi).pdb, 'pdb');
+  hero.v.zoomTo({model: hero.hi.getID()}); hero.v.zoom(0.8);
   hero.down = hero.v.getView();
   hero.v.rotate(90, 'y');
-  hero.v.zoomTo(); hero.v.zoom(1.35);
+  hero.v.zoomTo(); hero.v.zoom(1.5);
   hero.side = hero.v.getView();
-  styleHero(); hero.v.render();
-  if (!reduce) hero.v.spin('x', 0.4);
+  setHero('side');
 }
 function styleHero() {
-  const v = hero.v, c0 = tok('--pf0'), c1 = tok('--pf1'), grey = tok('--line'), ink = tok('--ink');
-  v.removeAllLabels();
-  for (const {m, chainInfo, kc} of hero.models) {
-    const id = m.getID();
-    const pf0 = chainsWhere(chainInfo, i => i.pf === 0), pf1 = chainsWhere(chainInfo, i => i.pf === 1);
-    const mid = chainsWhere(chainInfo, i => i.k + kc === 0 && i.pf === 0);
-    if (hero.mode === 'layer') {
-      v.setStyle({model: id}, {cartoon: {color: grey, thickness: 0.3}});
-      if (mid.length) {
-        v.setStyle({model: id, chain: mid}, {cartoon: {color: c0, thickness: 0.6}, stick: {colorscheme: 'default', radius: 0.18}});
-      }
-    } else {
-      v.setStyle({model: id, chain: pf0}, {cartoon: {color: c0}});
-      v.setStyle({model: id, chain: pf1}, {cartoon: {color: c1}});
-    }
+  const v = hero.v;
+  const sid = hero.stack.getID();
+  if (hero.mode === 'down') {
+    // looking down the axis, only the few layers just below the highlighted one; deeper layers fan out with the twist and clutter the view
+    v.setStyle({model: sid}, {});
+    v.setStyle({model: sid, chain: chainsWhere(hero.stackInfo, i => i.k >= HERO_TOP - 3)}, {cartoon: {color: tok('--line')}});
+  } else {
+    v.setStyle({model: sid}, {cartoon: {color: tok('--line')}});
   }
+  v.setStyle({model: hero.hi.getID()}, {cartoon: {color: tok('--congo')}, stick: {color: tok('--congo'), radius: 0.2}});
   v.render();
 }
 function setHero(mode) {
   hero.mode = mode;
   document.querySelectorAll('[data-hero]').forEach(b => b.setAttribute('aria-pressed', b.dataset.hero === mode));
-  hero.v.spin(false);
-  if (mode === 'down') { hero.v.setView(hero.down); }
-  else { hero.v.setView(hero.side); if (!reduce && mode === 'side') hero.v.spin('x', 0.4); }
+  hero.v.setView(mode === 'down' ? hero.down : hero.side);
   styleHero();
 }
 
@@ -673,8 +692,108 @@ function paint(id, img) {
   g.putImageData(d, 0, 0);
 }
 
+/* ---------- Section 7: fuzzy coat, charges, alchemy ---------- */
+function fitCanvas(cv, h) {
+  const dpr = devicePixelRatio || 1, W = cv.clientWidth;
+  cv.style.height = h + 'px';
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(h * dpr); }
+  const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); return [g, W, h];
+}
+// thermodynamic cycle
+const ALC = {G1: 9.0, G2: 12.0, sigma: 6.0, kT: 2.494}; // kJ/mol, illustrative; kT at 300 K
+function drawCycle() {
+  const mark = (x, y, phos) => {
+    // the serine side chain as a small blue bead; after the change a phosphate (P) hangs off it
+    let s = `<circle cx="${x}" cy="${y}" r="6" fill="var(--surface)" stroke="var(--steel)" stroke-width="2"/>`;
+    if (phos) s += `<line x1="${x + 5}" y1="${y - 4}" x2="${x + 13}" y2="${y - 12}" stroke="var(--amber)" stroke-width="2"/><circle cx="${x + 19}" cy="${y - 17}" r="9" fill="var(--amber)"/><text x="${x + 19}" y="${y - 13}" text-anchor="middle" style="font:700 11px var(--mono);fill:var(--surface)">P</text>`;
+    return s;
+  };
+  const loose = (cx, cy, phos) =>
+    `<path d="M${cx - 72} ${cy + 14} q 12 -30 26 -8 t 24 -4 t 24 -2 t 24 6 t 24 -10" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/>` +
+    `<line x1="${cx - 2}" y1="${cy + 1}" x2="${cx - 2}" y2="${cy - 18}" stroke="var(--muted)" stroke-width="2"/>` + mark(cx - 2, cy - 24, phos);
+  const fibre = (cx, cy, phos) => {
+    let s = '';
+    for (let i = 0; i < 9; i++) s += `<rect x="${cx - 62 + i * 14}" y="${cy - 26}" width="8" height="52" rx="2" fill="${i === 4 ? 'var(--congo)' : 'var(--line)'}"/>`;
+    return s + `<line x1="${cx}" y1="${cy - 26}" x2="${cx}" y2="${cy - 38}" stroke="var(--congo)" stroke-width="2"/>` + mark(cx, cy - 44, phos);
+  };
+  const cap = (x, y, t) => `<text x="${x}" y="${y}" text-anchor="middle" class="svgl">${t}</text>`;
+  const ar = (x1, y1, x2, y2, col, dash) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2" ${dash ? 'stroke-dasharray="5 4"' : ''} marker-end="url(#ah2)"/>`;
+  let h = `<defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>`;
+  h += loose(105, 78, false) + cap(105, 118, 'loose · serine');
+  h += loose(415, 78, true) + cap(415, 118, 'loose · phosphoserine');
+  h += fibre(105, 256, false) + cap(105, 300, 'fibre · serine');
+  h += fibre(415, 256, true) + cap(415, 300, 'fibre · phosphoserine');
+  h += ar(190, 72, 322, 72, 'var(--steel)') + ar(190, 250, 322, 250, 'var(--congo)');
+  h += `<text x="256" y="62" text-anchor="middle" class="svgl" style="fill:var(--steel)">ΔG₁ · alchemy</text><text x="256" y="240" text-anchor="middle" class="svgl" style="fill:var(--congo)">ΔG₂ · alchemy</text>`;
+  h += ar(105, 130, 105, 188, 'var(--muted)', 1) + ar(415, 130, 415, 188, 'var(--muted)', 1);
+  h += cap(260, 156, 'joining the fibre ↓') + cap(260, 172, 'too slow to simulate');
+  h += `<text x="260" y="334" text-anchor="middle" style="font:500 14px var(--mono);fill:var(--ink)">ΔΔG = ΔG₂ − ΔG₁</text>`;
+  document.getElementById('cycle').innerHTML = h;
+}
+// serine -> phosphoserine morph (2D sketch)
+function drawMorph() {
+  const l = +document.getElementById('lam').value;
+  document.getElementById('lam-out').textContent = l.toFixed(2) + (l === 0 ? ' · serine' : l === 1 ? ' · phosphoserine' : ' · part serine, part phosphoserine');
+  const at = (x, y, t, col, op = 1, r = 17) => `<g opacity="${op.toFixed(2)}"><circle cx="${x}" cy="${y}" r="${r}" fill="var(--surface)" stroke="${col}" stroke-width="2" ${op < 1 && op > 0 ? 'stroke-dasharray="4 3"' : ''}/><text x="${x}" y="${y + 5}" text-anchor="middle" style="font:600 14px var(--mono);fill:${col}">${t}</text></g>`;
+  const bd = (x1, y1, x2, y2, op = 1) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--muted)" stroke-width="2" opacity="${op.toFixed(2)}"/>`;
+  let h = '';
+  h += `<text x="52" y="140" text-anchor="middle" class="svgl">backbone</text>`;
+  h += bd(52, 90, 132, 90) + bd(132, 90, 212, 90);
+  h += bd(212, 90, 250, 50, 1 - l);                                   // O–H bond fades out
+  h += bd(212, 90, 292, 90, l) + bd(292, 90, 292, 34, l) + bd(292, 90, 292, 146, l) + bd(292, 90, 368, 90, l); // phosphate fades in
+  h += at(52, 90, 'Cα', 'var(--muted)') + at(132, 90, 'Cβ', 'var(--muted)') + at(212, 90, 'O', 'var(--steel)');
+  h += at(250, 50, 'H', 'var(--muted)', 1 - l, 13);
+  h += at(292, 90, 'P', 'var(--amber)', l) + at(292, 34, 'O⁻', 'var(--congo)', l) + at(292, 146, 'O⁻', 'var(--congo)', l) + at(368, 90, 'O', 'var(--congo)', l);
+  document.getElementById('morph').innerHTML = h;
+}
+// Crooks: Gaussian work distributions with equal variance; forward mean ΔG+σ²/2kT, reverse (sign-flipped) ΔG−σ²/2kT
+const cr = {wf: [], wr: []};
+function gaussR() { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2832 * v); }
+function crRun(n) {
+  const {G2, sigma, kT} = ALC, d = sigma * sigma / (2 * kT);
+  for (let i = 0; i < n; i++) { cr.wf.push(G2 + d + sigma * gaussR()); cr.wr.push(G2 - d + sigma * gaussR()); } // wr stored as −W_reverse
+  crDraw();
+}
+function bar(wf, wr, kT) { // Bennett acceptance ratio, equal sample sizes; wr is −W_reverse
+  const fermi = x => 1 / (1 + Math.exp(x));
+  const F = g => wf.reduce((s, w) => s + fermi((w - g) / kT), 0) - wr.reduce((s, w) => s + fermi((g - w) / kT), 0);
+  let lo = -50, hi = 80; for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; F(m) > 0 ? hi = m : lo = m; }
+  return (lo + hi) / 2;
+}
+function crDraw() {
+  const [g, W, H] = fitCanvas(document.getElementById('crooks'), 250);
+  g.fillStyle = tok('--surface'); g.fillRect(0, 0, W, H);
+  const L = 40, R = W - 16, T = 44, B = H - 38, lo = -15, hi = 40, bw = 2, X = w => L + (R - L) * (w - lo) / (hi - lo);
+  const bins = n => { const c = new Array(Math.round((hi - lo) / bw)).fill(0); n.forEach(w => { const k = Math.floor((w - lo) / bw); if (k >= 0 && k < c.length) c[k]++; }); return c; };
+  const bf = bins(cr.wf), br = bins(cr.wr), mx = Math.max(4, ...bf, ...br);
+  g.strokeStyle = tok('--line'); g.beginPath(); g.moveTo(L, B); g.lineTo(R, B); g.stroke();
+  g.font = '11px IBM Plex Mono, monospace'; g.fillStyle = tok('--muted'); g.textAlign = 'center';
+  for (let w = -10; w <= 40; w += 10) g.fillText(w, X(w), B + 16);
+  g.fillText('work (kJ/mol)', (L + R) / 2, H - 4);
+  const draw = (c, col) => { g.fillStyle = col; g.globalAlpha = 0.55; c.forEach((v, k) => { if (!v) return; const x = X(lo + k * bw), h = (B - T) * v / mx; g.fillRect(x + 1, B - h, X(lo + bw) - X(lo) - 2, h); }); g.globalAlpha = 1; };
+  draw(bf, tok('--congo')); draw(br, tok('--steel'));
+  g.textAlign = 'left'; g.fillStyle = tok('--congo'); g.fillRect(L, 10, 10, 10); g.fillText('serine → phosphoserine', L + 16, 19);
+  g.fillStyle = tok('--steel'); g.fillRect(L + 200, 10, 10, 10); g.fillText('reverse (sign flipped)', L + 216, 19);
+  document.getElementById('cr-n').textContent = cr.wf.length + cr.wr.length;
+  if (cr.wf.length >= 3) {
+    const est = bar(cr.wf, cr.wr, ALC.kT);
+    g.strokeStyle = tok('--ink'); g.setLineDash([5, 4]); g.beginPath(); g.moveTo(X(est), T - 6); g.lineTo(X(est), B); g.stroke(); g.setLineDash([]);
+    g.fillStyle = tok('--ink'); g.textAlign = 'center'; g.fillText('ΔG ≈ ' + est.toFixed(1), X(est), T - 10);
+    document.getElementById('cr-g').textContent = est.toFixed(1) + ' kJ/mol';
+    const dd = est - ALC.G1;
+    document.getElementById('cr-dd').textContent = (dd >= 0 ? '+' : '') + dd.toFixed(1) + ' kJ/mol' + (dd > 0 ? ' · less stable' : ' · more stable');
+  }
+}
+function initCompute() {
+  drawCycle();
+  document.getElementById('lam').addEventListener('input', drawMorph); drawMorph();
+  crRun(10);
+  document.getElementById('cr-run').addEventListener('click', () => crRun(10));
+  document.getElementById('cr-reset').addEventListener('click', () => { cr.wf = []; cr.wr = []; crRun(5); });
+}
+
 /* ---------- Boot ---------- */
-function recolorAll() { styleHero(); styleFold(); selectPtm(ptm.sel); styleAtlas(); }
+function recolorAll() { styleHero(); styleFold(); selectPtm(ptm.sel); styleAtlas(); crDraw(); }
 function boot() {
   if (typeof $3Dmol === 'undefined') { document.querySelectorAll('.viewer').forEach(el => el.innerHTML = '<p class="muted small" style="padding:16px">The 3D viewer could not load.</p>'); }
   else { initHero(); initFold(); initPtm(); }
@@ -682,11 +801,12 @@ function boot() {
   document.querySelectorAll('[data-fold]').forEach(b => b.addEventListener('click', () => { showFold(b.dataset.fold); drawSeq(); }));
   drawSchem(); drawTht(); initAtlas();
   initEM();
+  initCompute();
   if (typeof $3Dmol !== 'undefined') {
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolorAll);
     new MutationObserver(recolorAll).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   }
-  let rw; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { drawSeq(); }, 200); });
+  let rw; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { drawSeq(); crDraw(); }, 200); });
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 </script>
