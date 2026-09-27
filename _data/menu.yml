@@ -32,11 +32,15 @@ entries:
           - title: "4th year thesis: Keap1 cancer mutants: A large-scale molecular dynamics study of protein stability."
           - title: "3rd year project: Investigating a novel protein docking method using the disordered binding partners of CBP."
 
-  - bold: Research interests
+  - bold: Teaching
     entries:
-      - title: Alchemical free energy calculations
-      - title: Aquaporin gating and selectivity
-      - title: Amyloid structure and post-translational modifications
+      - title: <a href='amyloid/'>Amyloid, Up Close</a>
+
+  #- bold: Research interests
+  #  entries:
+  #    - title: Alchemical free energy calculations
+  #    - title: Aquaporin gating and selectivity
+  #    - title: Amyloid structure and post-translational modifications
 
   - bold: Recent publications
     post_list:
@@ -44,10 +48,6 @@ entries:
       show_more: true
       show_more_text: More
       show_more_url: archive.html
-
-  - bold: Outreach
-    entries:
-      - title: <a href='amyloid/'>Amyloid, Up Close</a> — an interactive guide to amyloid fibrils for non-scientists
 
   - bold: Awards
     entries:
