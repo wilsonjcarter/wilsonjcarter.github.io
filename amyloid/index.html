@@ -14,7 +14,7 @@
 :root{
   --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#F3F3F4; --ink:#111113; --muted:#5E5E66; --line:#DEDEE2;
   /* --congo = fibril colour (burnt orange), --steel = highlight colour (cobalt) */
-  --congo:#C95F24; --apple:#2E8A57; --steel:#2451C2; --amber:#B7791F;
+  --congo:#C95F24; --apple:#2E8A57; --steel:#2451C2; --amber:#B7791F; --neg:#C0392B;
   --pf0:var(--congo); --pf1:var(--steel);
   --display:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --serif:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
@@ -24,13 +24,13 @@
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --bg:#000000; --surface:#0C0C0E; --sunk:#18181B; --ink:#EDEDF0; --muted:#A0A0AA; --line:#2B2B30;
-    --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55;
+    --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55; --neg:#F07A7A;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#000000; --surface:#0C0C0E; --sunk:#18181B; --ink:#EDEDF0; --muted:#A0A0AA; --line:#2B2B30;
-  --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55;
+  --congo:#F08B52; --apple:#6BC792; --steel:#7EA2FF; --amber:#E3AA55; --neg:#F07A7A;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -86,6 +86,30 @@ section{padding-block:72px 8px;display:grid;gap:28px}
 .ptm-card{display:grid;gap:8px;padding:18px 20px;border-top:1px solid var(--line)}
 .ptm-card .where{font:12px/1.3 var(--mono);color:var(--muted)}
 /* sim */
+/* primer */
+.primer{margin-block:40px 0;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.primer>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 20px;font:600 19px/1.3 var(--display)}
+.primer>summary::-webkit-details-marker{display:none}
+.primer>summary>span:first-child::before{content:"+";display:inline-block;width:1.2em;color:var(--steel);font-family:var(--mono)}
+.primer[open]>summary>span:first-child::before{content:"–"}
+.primer>summary:focus-visible{outline:2px solid var(--steel);outline-offset:2px;border-radius:14px}
+.primer-body{display:grid;gap:22px;padding:4px 20px 24px;border-top:1px solid var(--line)}
+.primer-body>.prose:first-child{padding-top:18px}
+.aa-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.aa-grp{padding:14px 16px;display:grid;gap:8px;align-content:start}
+.aa-grp+.aa-grp{border-left:1px solid var(--line)}
+.aa-grp h4{margin:0;font:600 14px/1.2 var(--display);display:flex;align-items:center;gap:8px}
+.aa-grp h4 i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.aa-grp ul{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:14px}
+.aa-grp li b{font:500 13px var(--mono);display:inline-block;width:1.4em}
+.aa-grp p{margin:0;font-size:13px;color:var(--muted)}
+.aa-seq-wrap{border-top:1px solid var(--line);padding:14px 16px;display:grid;gap:10px}
+.aa-seq{display:flex;flex-wrap:wrap;gap:2px;font:500 13px/1 var(--mono)}
+.aa-seq span{width:1.5em;height:1.7em;display:inline-grid;place-items:center;border-radius:3px;color:var(--bg)}
+.aa-seq span.gap{margin-left:6px}
+.land-cap{margin:0;padding:12px 16px 16px;font-size:15px;color:var(--muted);min-height:4.5em}
+@media (max-width:820px){.aa-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.aa-grp+.aa-grp{border-left:0}.aa-grp{border-top:1px solid var(--line)}.aa-grp:nth-child(-n+2){border-top:0}.aa-grp:nth-child(even){border-left:1px solid var(--line)}}
+
 .tht{padding:16px}
 .schem-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 .schem-grid figure{margin:0;display:grid;align-content:start;padding:12px 12px 16px}
@@ -183,6 +207,41 @@ footer .mono{font-size:12px}
       </div>
     </div>
   </header>
+
+  <details class="primer" id="primer">
+    <summary><span>New to proteins? Start here</span><span class="mono small muted">two-minute refresher</span></summary>
+    <div class="primer-body">
+      <div class="prose stack">
+        <div class="eyebrow"><b>A</b> The alphabet</div>
+        <h3>Proteins are chains written in 20 letters</h3>
+        <p>A protein is a chain of building blocks called amino acids, strung together like beads. There are 20 kinds, and each has a different side group sticking off the chain. What matters most is its character: oily ones avoid water and like to hide together, charged ones attract or repel each other, and a few special ones bend or lock the chain.</p>
+      </div>
+      <div class="figure">
+        <div class="aa-grid" id="aa-grid"></div>
+        <div class="aa-seq-wrap">
+          <div class="mono small muted">α-synuclein, all 140 letters</div>
+          <div class="aa-seq" id="aa-seq" aria-label="Alpha-synuclein sequence coloured by amino acid type"></div>
+          <p class="small muted">The start is rich in positive lysines (K) and grips cell membranes. The middle stretch (NAC, residues 61–95) is about half oily with almost no charge: this is the part that stacks into the fibre core. The tail carries 15 negative charges (D, E) and stays floppy.</p>
+        </div>
+      </div>
+
+      <div class="prose stack">
+        <div class="eyebrow"><b>B</b> The landscape</div>
+        <h3>Folding is rolling downhill</h3>
+        <p>A useful picture is a landscape of free energy, a measure of how stable each shape of the chain is. The chain wanders over it like a ball, drifting toward lower ground: the lower the point, the more stable that shape. Compare a typical protein with α-synuclein:</p>
+      </div>
+      <div class="figure">
+        <div class="controls" style="border-top:0;border-bottom:1px solid var(--line)" role="group" aria-label="Choose a protein">
+          <button data-land="fold" aria-pressed="true">Typical folded protein</button>
+          <button data-land="idp" aria-pressed="false">α-Synuclein (disordered)</button>
+        </div>
+        <div style="padding:12px 16px 0"><svg id="land" viewBox="0 0 1000 300" role="img" aria-label="Schematic free-energy landscape" style="width:100%;height:auto;display:block"></svg></div>
+        <div class="controls" id="land-states" role="group" aria-label="Move the protein"></div>
+        <p class="land-cap" id="land-cap"></p>
+      </div>
+      <p class="prose muted small">A sketch, not a calculation. Real landscapes have thousands of dimensions; this squeezes them onto one axis.</p>
+    </div>
+  </details>
 
   <section id="stack">
     <div class="prose stack">
@@ -803,8 +862,83 @@ function initCompute() {
   document.getElementById('cr-reset').addEventListener('click', () => { cr.wf = []; cr.wr = []; crRun(5); });
 }
 
+/* ---------- Primer: amino acids + folding landscape ---------- */
+const AA_GROUPS = [
+  {k: 'oily', name: 'Oily', note: 'Avoid water; pack together inside proteins and fibres.', col: '--amber', aa: [['A', 'alanine'], ['V', 'valine'], ['L', 'leucine'], ['I', 'isoleucine'], ['M', 'methionine'], ['F', 'phenylalanine'], ['W', 'tryptophan']]},
+  {k: 'polar', name: 'Polar', note: 'Like water; can form hydrogen bonds.', col: '--apple', aa: [['S', 'serine'], ['T', 'threonine'], ['N', 'asparagine'], ['Q', 'glutamine'], ['Y', 'tyrosine']]},
+  {k: 'pos', name: 'Positive', note: 'Carry a + charge (histidine only sometimes).', col: '--steel', aa: [['K', 'lysine'], ['R', 'arginine'], ['H', 'histidine']]},
+  {k: 'neg', name: 'Negative', note: 'Carry a − charge.', col: '--neg', aa: [['D', 'aspartate'], ['E', 'glutamate']]},
+  {k: 'special', name: 'Special', note: 'Glycine bends, proline kinks, cysteine can crosslink.', col: '--muted', aa: [['G', 'glycine'], ['P', 'proline'], ['C', 'cysteine']]},
+];
+const AA_COL = {}; AA_GROUPS.forEach(g => g.aa.forEach(([l]) => AA_COL[l] = g.col));
+function initAA() {
+  document.getElementById('aa-grid').innerHTML = AA_GROUPS.map(g => `<div class="aa-grp"><h4><i style="background:var(${g.col})"></i>${g.name}</h4><ul>${g.aa.map(([l, n]) => `<li><b style="color:var(${g.col})">${l}</b>${n}</li>`).join('')}</ul><p>${g.note}</p></div>`).join('');
+  document.getElementById('aa-seq').innerHTML = [...SEQ].map((c, i) => `<span${i && i % 10 === 0 ? ' class="gap"' : ''} style="background:var(${AA_COL[c]})" title="${c}${i + 1}">${c}</span>`).join('');
+}
+// schematic 1D free-energy landscapes (arbitrary units; lower = more stable)
+const gs = (x, m, s) => Math.exp(-(((x - m) / s) ** 2));
+const LAND = {
+  fold: {E: x => 0.95 - 0.72 * gs(x, 0.42, 0.13) + 0.035 * Math.sin(x * 70) * gs(x, 0.1, 0.12) + 0.42 * gs(x, 0.66, 0.045) - 1.0 * gs(x, 0.86, 0.05),
+    states: [['Unfolded', 0.1, 'A freshly made chain is floppy and high on the landscape. Like a ball on a hillside, it rolls downhill.'],
+             ['Folded', 0.42, 'Most proteins roll down a funnel into one well-defined shape, their native fold, and stay there to do their job.'],
+             ['Amyloid', 0.86, 'Amyloid can be even more stable than the native fold, but a high barrier stands in the way. Crossing it is rare, which is why fibres form slowly, and once there the protein rarely comes back.']]},
+  idp: {E: x => 0.6 + (0.06 * Math.sin(x * 48) + 0.035 * Math.sin(x * 101)) * (1 - gs(x, 0.86, 0.12)) - 0.3 * gs(x, 0.5, 0.035) + 0.5 * gs(x, 0.66, 0.045) - 1.0 * gs(x, 0.86, 0.05),
+    states: [['Disordered', 0.22, 'α-Synuclein has no deep native well. Its landscape is flat and bumpy, so the chain keeps changing shape. In a healthy cell that flexibility is normal and useful.'],
+             ['Oligomer', 0.5, 'Now and then a few chains stick together in small clumps called oligomers. These shallow wells are short-lived, but such clumps are thought to be among the most toxic forms.'],
+             ['Amyloid', 0.86, 'Past the barrier lies the deep amyloid well. With no folded state to hold it, the only deep well on this landscape is the fibre.']]},
+};
+const land = {mode: 'fold', x: 0.1, target: 0.1, raf: 0};
+function landGeom() {
+  const svg = document.getElementById('land'), W = Math.max(300, Math.round(svg.getBoundingClientRect().width) || 1000), H = 260;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const L = 30, R = W - 10, T = 16, B = H - 40, lo = -0.45, hi = 1.45;
+  return {svg, W, H, L, R, T, B, X: x => L + (R - L) * x, Y: e => T + (B - T) * (hi - Math.min(hi, Math.max(lo, e))) / (hi - lo)};
+}
+function drawLand() {
+  const g = landGeom(); if (!g.svg.getBoundingClientRect().width) return;
+  const E = LAND[land.mode].E; let d = '';
+  for (let i = 0; i <= 300; i++) { const x = i / 300; d += (i ? 'L' : 'M') + g.X(x).toFixed(1) + ' ' + g.Y(E(x)).toFixed(1); }
+  const narrow = g.W < 560;
+  let h = `<rect x="${g.X(0.76)}" y="${g.T}" width="${g.X(0.97) - g.X(0.76)}" height="${g.B - g.T}" fill="var(--congo)" opacity="0.08"/>`;
+  h += `<text x="${g.X(0.865)}" y="${g.T + 14}" text-anchor="middle" class="svgl" style="fill:var(--congo)">amyloid</text>`;
+  h += `<path d="${d} L${g.R} ${g.B} L${g.L} ${g.B} Z" fill="var(--sunk)"/><path d="${d}" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  h += `<line x1="${g.L}" y1="${g.B}" x2="${g.R}" y2="${g.B}" stroke="var(--muted)"/>`;
+  h += `<text x="${g.R}" y="${g.B + 24}" text-anchor="end" class="svgl">shape of the chain →</text>`;
+  h += `<text transform="translate(${g.L - 12} ${g.B}) rotate(-90)" class="svgl">free energy →</text>`;
+  const bx = g.X(land.x), by = g.Y(E(land.x)) - 11;
+  h += `<circle cx="${bx}" cy="${by}" r="10" fill="var(--steel)" stroke="var(--surface)" stroke-width="2"/>`;
+  g.svg.innerHTML = h;
+}
+function landTo(x, i) {
+  land.target = x;
+  const st = LAND[land.mode].states[i];
+  document.getElementById('land-cap').textContent = st[2];
+  document.querySelectorAll('#land-states button').forEach((b, j) => b.setAttribute('aria-pressed', j === i));
+  cancelAnimationFrame(land.raf);
+  const step = () => {
+    const dx = land.target - land.x;
+    if (reduce || Math.abs(dx) < 0.002) { land.x = land.target; drawLand(); return; }
+    land.x += dx * 0.08; drawLand(); land.raf = requestAnimationFrame(step);
+  };
+  step();
+}
+function landMode(m) {
+  land.mode = m;
+  document.querySelectorAll('[data-land]').forEach(b => b.setAttribute('aria-pressed', b.dataset.land === m));
+  const box = document.getElementById('land-states');
+  box.innerHTML = LAND[m].states.map(([n], i) => `<button aria-pressed="false">${n}</button>`).join('');
+  box.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => landTo(LAND[m].states[i][1], i)));
+  land.x = LAND[m].states[0][1]; landTo(land.x, 0);
+}
+function initPrimer() {
+  initAA();
+  document.querySelectorAll('[data-land]').forEach(b => b.addEventListener('click', () => landMode(b.dataset.land)));
+  landMode('fold');
+  document.getElementById('primer').addEventListener('toggle', drawLand);
+}
+
 /* ---------- Boot ---------- */
-function recolorAll() { styleHero(); styleFold(); selectPtm(ptm.sel); styleAtlas(); crDraw(); }
+function recolorAll() { styleHero(); styleFold(); selectPtm(ptm.sel); styleAtlas(); crDraw(); drawLand(); }
 function boot() {
   if (typeof $3Dmol === 'undefined') { document.querySelectorAll('.viewer').forEach(el => el.innerHTML = '<p class="muted small" style="padding:16px">The 3D viewer could not load.</p>'); }
   else { initHero(); initFold(); initPtm(); }
@@ -813,11 +947,12 @@ function boot() {
   drawSchem(); drawTht(); initAtlas();
   initEM();
   initCompute();
+  initPrimer();
   if (typeof $3Dmol !== 'undefined') {
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolorAll);
     new MutationObserver(recolorAll).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   }
-  let rw; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { drawSeq(); drawTht(); crDraw(); }, 200); });
+  let rw; addEventListener('resize', () => { clearTimeout(rw); rw = setTimeout(() => { drawSeq(); drawTht(); crDraw(); drawLand(); }, 200); });
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 </script>
