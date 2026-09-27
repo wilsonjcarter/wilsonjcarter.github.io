@@ -771,9 +771,9 @@ function bar(wf, wr, kT) { // Bennett acceptance ratio, equal sample sizes; wr i
   return (lo + hi) / 2;
 }
 function crDraw() {
-  const [g, W, H] = fitCanvas(document.getElementById('crooks'), 250);
+  const [g, W, H] = fitCanvas(document.getElementById('crooks'), 270);
   g.fillStyle = tok('--surface'); g.fillRect(0, 0, W, H);
-  const L = 40, R = W - 16, T = 44, B = H - 38, lo = -15, hi = 40, bw = 2, X = w => L + (R - L) * (w - lo) / (hi - lo);
+  const L = 40, R = W - 16, T = 66, B = H - 38, lo = -15, hi = 40, bw = 2, X = w => L + (R - L) * (w - lo) / (hi - lo);
   const bins = n => { const c = new Array(Math.round((hi - lo) / bw)).fill(0); n.forEach(w => { const k = Math.floor((w - lo) / bw); if (k >= 0 && k < c.length) c[k]++; }); return c; };
   const bf = bins(cr.wf), br = bins(cr.wr), mx = Math.max(4, ...bf, ...br);
   g.strokeStyle = tok('--line'); g.beginPath(); g.moveTo(L, B); g.lineTo(R, B); g.stroke();
@@ -782,8 +782,9 @@ function crDraw() {
   g.fillText('work (kJ/mol)', (L + R) / 2, H - 4);
   const draw = (c, col) => { g.fillStyle = col; g.globalAlpha = 0.55; c.forEach((v, k) => { if (!v) return; const x = X(lo + k * bw), h = (B - T) * v / mx; g.fillRect(x + 1, B - h, X(lo + bw) - X(lo) - 2, h); }); g.globalAlpha = 1; };
   draw(bf, tok('--congo')); draw(br, tok('--steel'));
+  // legend stacked in two rows so it fits on phones
   g.textAlign = 'left'; g.fillStyle = tok('--congo'); g.fillRect(L, 10, 10, 10); g.fillText('serine → phosphoserine', L + 16, 19);
-  g.fillStyle = tok('--steel'); g.fillRect(L + 200, 10, 10, 10); g.fillText('reverse (sign flipped)', L + 216, 19);
+  g.fillStyle = tok('--steel'); g.fillRect(L, 28, 10, 10); g.fillText('phosphoserine → serine (sign flipped)', L + 16, 37);
   document.getElementById('cr-n').textContent = cr.wf.length + cr.wr.length;
   if (cr.wf.length >= 3) {
     const est = bar(cr.wf, cr.wr, ALC.kT);
