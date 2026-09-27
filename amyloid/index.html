@@ -878,11 +878,11 @@ function initAA() {
 // schematic 1D free-energy landscapes (arbitrary units; lower = more stable)
 const gs = (x, m, s) => Math.exp(-(((x - m) / s) ** 2));
 const LAND = {
-  fold: {E: x => 0.95 - 0.72 * gs(x, 0.42, 0.13) + 0.035 * Math.sin(x * 70) * gs(x, 0.1, 0.12) + 0.42 * gs(x, 0.66, 0.045) - 1.0 * gs(x, 0.86, 0.05),
+  fold: {E: x => 0.95 - 1.0 * gs(x, 0.42, 0.13) + 0.035 * Math.sin(x * 70) * gs(x, 0.1, 0.12) + 0.42 * gs(x, 0.66, 0.045) - 1.2 * gs(x, 0.86, 0.05),
     states: [['Unfolded', 0.1, 'A freshly made chain is floppy and high on the landscape. Like a ball on a hillside, it rolls downhill.'],
              ['Folded', 0.42, 'Most proteins roll down a funnel into one well-defined shape, their native fold, and stay there to do their job.'],
              ['Amyloid', 0.86, 'Amyloid can be even more stable than the native fold, but a high barrier stands in the way. Crossing it is rare, which is why fibres form slowly, and once there the protein rarely comes back.']]},
-  idp: {E: x => 0.6 + (0.06 * Math.sin(x * 48) + 0.035 * Math.sin(x * 101)) * (1 - gs(x, 0.86, 0.12)) - 0.3 * gs(x, 0.5, 0.035) + 0.5 * gs(x, 0.66, 0.045) - 1.0 * gs(x, 0.86, 0.05),
+  idp: {E: x => 0.95 + (0.06 * Math.sin(x * 48) + 0.035 * Math.sin(x * 101)) * (1 - gs(x, 0.86, 0.12)) - 0.3 * gs(x, 0.5, 0.035) + 0.42 * gs(x, 0.66, 0.045) - 1.2 * gs(x, 0.86, 0.05),
     states: [['Disordered', 0.22, 'α-Synuclein has no deep native well. Its landscape is flat and bumpy, so the chain keeps changing shape. In a healthy cell that flexibility is normal and useful.'],
              ['Oligomer', 0.5, 'Now and then a few chains stick together in small clumps called oligomers. These shallow wells are short-lived, but such clumps are thought to be among the most toxic forms.'],
              ['Amyloid', 0.86, 'Past the barrier lies the deep amyloid well. With no folded state to hold it, the only deep well on this landscape is the fibre.']]},
@@ -891,7 +891,7 @@ const land = {mode: 'fold', x: 0.1, target: 0.1, raf: 0};
 function landGeom() {
   const svg = document.getElementById('land'), W = Math.max(300, Math.round(svg.getBoundingClientRect().width) || 1000), H = 260;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  const L = 30, R = W - 10, T = 16, B = H - 40, lo = -0.45, hi = 1.45;
+  const L = 30, R = W - 10, T = 16, B = H - 40, lo = -0.4, hi = 1.5;
   return {svg, W, H, L, R, T, B, X: x => L + (R - L) * x, Y: e => T + (B - T) * (hi - Math.min(hi, Math.max(lo, e))) / (hi - lo)};
 }
 function drawLand() {
@@ -903,6 +903,7 @@ function drawLand() {
   h += `<text x="${g.X(0.865)}" y="${g.T + 14}" text-anchor="middle" class="svgl" style="fill:var(--congo)">amyloid</text>`;
   h += `<path d="${d} L${g.R} ${g.B} L${g.L} ${g.B} Z" fill="var(--sunk)"/><path d="${d}" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>`;
   h += `<line x1="${g.L}" y1="${g.B}" x2="${g.R}" y2="${g.B}" stroke="var(--muted)"/>`;
+  [0.95, 0].forEach(e => h += `<line x1="${g.L}" y1="${g.Y(e)}" x2="${g.R}" y2="${g.Y(e)}" stroke="var(--line)" stroke-dasharray="4 4"/>`);
   h += `<text x="${g.R}" y="${g.B + 24}" text-anchor="end" class="svgl">shape of the chain →</text>`;
   h += `<text transform="translate(${g.L - 12} ${g.B}) rotate(-90)" class="svgl">free energy →</text>`;
   const bx = g.X(land.x), by = g.Y(E(land.x)) - 11;
