@@ -273,7 +273,7 @@ footer .mono{font-size:12px}
     </div>
   </section>
 
-
+  
 <section id="cryoem">
     <div class="prose stack">
       <div class="eyebrow"><b>6</b> Scale · 1.25 Å per pixel</div>
@@ -720,7 +720,7 @@ function drawCycle() {
   };
   const loose = (cx, cy, phos) =>
     `<path d="M${cx - 72} ${cy + 14} q 12 -30 26 -8 t 24 -4 t 24 -2 t 24 6 t 24 -10" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/>` +
-    `<line x1="${cx - 2}" y1="${cy + 1}" x2="${cx - 2}" y2="${cy - 18}" stroke="var(--muted)" stroke-width="2"/>` + mark(cx - 2, cy - 24, phos);
+    `<line x1="${cx + 2}" y1="${cy - 1}" x2="${cx + 2}" y2="${cy - 18}" stroke="var(--muted)" stroke-width="2"/>` + mark(cx + 2, cy - 24, phos); // (cx+2, cy) is a vertex of the chain path
   const fibre = (cx, cy, phos) => {
     let s = '';
     for (let i = 0; i < 9; i++) s += `<rect x="${cx - 62 + i * 14}" y="${cy - 26}" width="8" height="52" rx="2" fill="${i === 4 ? 'var(--steel)' : 'var(--congo)'}"/>`;
