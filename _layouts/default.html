@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: "en" }}">
+<!doctype html>
+<html lang="{{ page.lang | default: 'en' }}">
   {%- include head.html -%}
-  <body a="{{ site.theme_config.appearance | default: "auto" }}">
-    <main class="page-content" aria-label="Content">
-      <div class="w">
+  <body class="layout-{{ page.layout }}">
+    <div class="wrap">
+      <nav class="topbar" aria-label="Site">
+        <a class="home" href="{{ '/' | relative_url }}">{{ site.author }}</a>
+        <span class="nav">
+          <a href="{{ '/#research' | relative_url }}">Research</a>
+          <a href="{{ '/#publications' | relative_url }}">Publications</a>
+          <a href="{{ '/#explainers' | relative_url }}">Explainers</a>
+          <a href="{{ site.data.cv.cv_pdf | relative_url }}" download="carterjwilson_cv.pdf">CV ↓</a>
+        </span>
+      </nav>
+      <main>
         {{ content }}
-      </div>
-    </main>
-
-    {%-if site.goat_counter and jekyll.environment == "production"-%}
-      {%-include goat_counter.html-%}
-    {%-endif-%}
+      </main>
+      <footer class="foot">
+        <span>{{ site.author }} · <a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+        <span class="links">
+          {%- for l in site.data.cv.links -%}<a href="{{ l.url }}">{{ l.name }}</a>{%- endfor -%}
+        </span>
+      </footer>
+    </div>
   </body>
 </html>

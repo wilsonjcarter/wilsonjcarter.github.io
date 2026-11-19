@@ -1,0 +1,44 @@
+cv_pdf: short_resume_cwilson_jan2026.pdf
+
+positions:
+  - when: "2026 –"
+    what: "Postdoctoral researcher"
+    where: "<a href='https://www.mpinat.mpg.de/degroot'>Computational Biomolecular Dynamics</a> (de Groot group), MPI for Multidisciplinary Sciences, Göttingen"
+
+education:
+  - when: "2023 – 2026"
+    what: "PhD, Biophysics"
+    where: "<a href='https://www.uni-goettingen.de/en/about+us/58765.html'>GGNB, University of Göttingen</a> · with <a href='https://www.mpinat.mpg.de/degroot'>Bert L. de Groot</a>"
+    detail: "Thesis: <i>Making Permanent Impressions</i> (defended July 2026)"
+  - when: "2021 – 2023"
+    what: "MSc, Applied Mathematics"
+    where: "<a href='https://www.uwo.ca/'>Western University</a>, London, Canada · with <a href='https://softsimu.net/mikko/'>Mikko Karttunen</a> and <a href='https://publish.uwo.ca/~jchoy4/choy/Contact.html'>Wing-Yiu Choy</a>"
+    detail: "Thesis: <i>A Highly Charged Topic: Intrinsically Disordered Proteins and Protein pKa Values</i>. Research stay in the de Groot group, MPI-NAT, May – Nov 2022."
+  - when: "2016 – 2021"
+    what: "BMSc, Computational Biochemistry (Hons) and BSc, Applied Mathematics"
+    where: "<a href='https://www.uwo.ca/'>Western University</a>, London, Canada"
+    detail: "Thesis: <i>Keap1 cancer mutants: a large-scale molecular dynamics study of protein stability</i>"
+
+awards:
+  - "NSERC Graduate Scholarship (2025 – 2027)"
+  - "NSERC Study Grant, MSFSS (2022)"
+  - "Ontario Graduate Scholarship (2022)"
+  - "Western Research Scholarship (2021 – 2022)"
+  - "NSERC Graduate Scholarship (2021)"
+  - "Western Gold Medal (2021)"
+  - "Western Scholar (2021)"
+  - "Graduation with Distinction (2021)"
+  - "Dean's Honours List (2016 – 2021)"
+  - "Western Scholarship of Excellence (2016)"
+
+links:
+  - name: Google Scholar
+    url: https://scholar.google.ca/citations?user=F9rjPeAAAAAJ
+  - name: ORCID
+    url: https://orcid.org/0000-0002-8992-6269
+  - name: ResearchGate
+    url: https://www.researchgate.net/profile/Carter_J_Wilson
+  - name: LinkedIn
+    url: https://ca.linkedin.com/in/wilsonjcarter
+  - name: Twitter
+    url: https://www.twitter.com/wilsonjcarter

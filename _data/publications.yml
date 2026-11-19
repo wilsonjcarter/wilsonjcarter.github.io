@@ -1,0 +1,127 @@
+# Publications, newest first.
+# Easiest way to add one:  python3 scripts/add_paper.py <DOI> --theme methods
+# or copy an entry below. Put * after a name for shared first authorship.
+# theme: methods | aquaporins | disorder
+# post: slug of the matching page in _posts (keeps old URLs alive)
+
+- title: "A transferable deprotonated tyrosine residue for Amber and CHARMM force fields"
+  authors: "Carter J. Wilson, Bert L. de Groot"
+  venue: "ChemRxiv"
+  year: 2026
+  doi: "10.26434/chemrxiv.15011973/v1"
+  note: preprint
+  theme: methods
+
+- title: "STIP1/HOP promotes the formation of cytotoxic α-synuclein oligomers"
+  authors: "Benjamin S. Rutledge, Carter J. Wilson, Rachel M. Lau, Juan C. Jurado-Coronel, Esther del Cid-Pellitero, Mikko Karttunen, Thomas M. Durcan, Edward A. Fon, Marco A. M. Prado, Justin Legleiter, Martin L. Duennwald, Wing-Yiu Choy"
+  venue: "Molecular Neurodegeneration Advances 2"
+  year: 2026
+  doi: "10.1186/s44477-026-00030-3"
+  theme: disorder
+  post: stip1-hop
+
+- title: "Improving conformational ensembles of folded proteins in GōMartini"
+  authors: "Maksim Kalutskii*, Carter J. Wilson*, Helmut Grubmüller, Maxim Igaev"
+  venue: "Journal of Chemical Theory and Computation 22 (5), 2369–2379"
+  year: 2026
+  doi: "10.1021/acs.jctc.5c01816"
+  theme: methods
+  post: pogo
+
+- title: "Structural insights into AQP3 channel closure upon pH and redox changes reveal an autoregulatory molecular mechanism"
+  authors: "Peng Huang*, Raminta Venskutonytė*, Carter J. Wilson*, Sara Bsharat, Rashmi B. Prasad, Pontus Gourdon, Isabella Artner, Bert L. de Groot, Karin Lindkvist-Petersson"
+  venue: "Nature Communications 16, 10997"
+  year: 2025
+  doi: "10.1038/s41467-025-67144-2"
+  theme: aquaporins
+  post: aqp3
+
+- title: "Quantification of the impact of structure quality on predicted binding free energy accuracy"
+  authors: "Sudarshan Behera, David F. Hahn, Carter J. Wilson, Simone Marsili, Gary Tresadern, Vytautas Gapsys, Bert L. de Groot"
+  venue: "Journal of Chemical Information and Modeling 65 (13), 6927–6938"
+  year: 2025
+  doi: "10.1021/acs.jcim.5c00947"
+  theme: methods
+  post: structure-quality-rbfe
+
+- title: "Free energy calculations for protein design"
+  authors: "Lisa Schmidt, Carter J. Wilson, Sudarshan Behera, Bert L. de Groot"
+  venue: "ChemRxiv"
+  year: 2025
+  doi: "10.26434/chemrxiv-2025-vp1ms"
+  note: preprint
+  theme: methods
+  post: fe-protein-design
+
+- title: "Free energy simulations to quantitatively study biomolecule stability and binding"
+  authors: "Sudarshan Behera, Carter J. Wilson, Lisa Schmidt, Bert L. de Groot"
+  venue: "Reference Module in Life Sciences, Elsevier"
+  year: 2025
+  doi: "10.1016/B978-0-323-99507-8.00039-1"
+  note: book chapter
+  theme: methods
+  post: fe-stability-binding
+
+- title: "Improving pKa predictions with reparameterized force fields and free energy calculations"
+  authors: "Carter J. Wilson, Vytautas Gapsys, Bert L. de Groot"
+  venue: "Journal of Chemical Theory and Computation 21 (8), 4095–4106"
+  year: 2025
+  doi: "10.1021/acs.jctc.5c00031"
+  theme: methods
+  post: pka-ff
+
+- title: "Molecular basis for human aquaporin inhibition"
+  authors: "Peng Huang, Hannah Åbacka*, Carter J. Wilson*, Malene Lykke Wind, Michael Rützler, Anna Hagström-Andersson, Pontus Gourdon, Bert L. de Groot, Raminta Venskutonytė, Karin Lindkvist-Petersson"
+  venue: "PNAS 121 (7), e2319682121"
+  year: 2024
+  doi: "10.1073/pnas.2319682121"
+  theme: aquaporins
+  post: aqp7
+
+- title: "Resolving coupled pH titrations using alchemical free energy calculations"
+  authors: "Carter J. Wilson, Bert L. de Groot, Vytautas Gapsys"
+  venue: "Journal of Computational Chemistry 45 (17), 1444–1455"
+  year: 2024
+  doi: "10.1002/jcc.27318"
+  theme: methods
+  post: pka-coupling
+
+- title: "Accurately predicting protein pKa values using non-equilibrium alchemy"
+  authors: "Carter J. Wilson, Mikko Karttunen, Bert L. de Groot, Vytautas Gapsys"
+  venue: "Journal of Chemical Theory and Computation 19 (21), 7833–7845"
+  year: 2023
+  doi: "10.1021/acs.jctc.3c00721"
+  theme: methods
+  post: pka-perf
+
+- title: "AlphaFold2: A role for disordered protein/region prediction?"
+  authors: "Carter J. Wilson, Wing-Yiu Choy, Mikko Karttunen"
+  venue: "International Journal of Molecular Sciences 23 (9), 4591"
+  year: 2022
+  doi: "10.3390/ijms23094591"
+  theme: disorder
+  post: alphafold2
+
+- title: "Matrin3: Disorder and ALS pathogenesis"
+  authors: "Ahmed Salem*, Carter J. Wilson*, Benjamin S. Rutledge, Allison Dilliott, Sali Farhan, Wing-Yiu Choy, Martin L. Duennwald"
+  venue: "Frontiers in Molecular Biosciences 8, 794646"
+  year: 2022
+  doi: "10.3389/fmolb.2021.794646"
+  theme: disorder
+  post: matrin3
+
+- title: "KEAP1 cancer mutants: A large-scale molecular dynamics study of protein stability"
+  authors: "Carter J. Wilson, Megan Chang, Mikko Karttunen, Wing-Yiu Choy"
+  venue: "International Journal of Molecular Sciences 22 (10), 5408"
+  year: 2021
+  doi: "10.3390/ijms22105408"
+  theme: disorder
+  post: keap1-cancer-mutants
+
+- title: "Exploring the conformational landscape of the Neh4 and Neh5 domains of Nrf2 using two different force fields and circular dichroism"
+  authors: "Megan Chang*, Carter J. Wilson*, Nadun Chanaka Karunatilleke, Mohamed Hesham Moselhy, Mikko Karttunen, Wing-Yiu Choy"
+  venue: "Journal of Chemical Theory and Computation 17 (5), 3145–3156"
+  year: 2021
+  doi: "10.1021/acs.jctc.0c01243"
+  theme: disorder
+  post: nrf2-landscape

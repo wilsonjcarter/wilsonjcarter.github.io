@@ -1,0 +1,14 @@
+{%- assign p = include.pub -%}
+{%- capture me -%}<b>Carter J. Wilson</b>{%- endcapture -%}
+<li class="pub" data-theme="{{ p.theme }}">
+  <span class="pub-year">{{ p.year }}</span>
+  <div>
+    <a class="pub-title" href="https://doi.org/{{ p.doi }}">{{ p.title }}</a>
+    <div class="pub-authors">{{ p.authors | replace: 'Carter J. Wilson', me }}</div>
+    <div class="pub-venue">
+      <i>{{ p.venue }}</i>
+      {%- if p.note %} <span class="tag">{{ p.note }}</span>{% endif -%}
+      {%- if p.post %} · <a href="{{ '/' | append: p.post | append: '.html' | relative_url }}">abstract</a>{% endif -%}
+    </div>
+  </div>
+</li>

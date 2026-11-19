@@ -1,27 +1,22 @@
-title: Computational Biophysics @ MPI-NAT # name of the site
+title: Carter J. Wilson # name of the site
 author: Carter J. Wilson # name of site's author
 email: cwilson@mpinat.mpg.de # email of site's author
 url: https://wilsonjcarter.github.io/ # root address of the site
-#baseurl: "/no-style-please" # subpath of the site, e.g. "/blog"
 description: > # description of the site (multiple lines allowed)
   Carter J. Wilson, computational biophysicist at MPI-NAT Göttingen: alchemical free energy calculations, aquaporins and amyloid.
 
 permalink: /:slug.html
 
 favicon: "icon5.png" # name+extension of favicon (which must be put on the root folder)
-# goat_counter: "yoursitename" # put your GoatCounter name if you want to use GoatCounter analytics
-
-remote_theme: riggraz/no-style-please # if you are using GitHub Pages, change it to remote_theme: riggraz/no-style-please
-
-theme_config:
-  appearance: "auto" # can be "light", "dark" or "auto"
-  back_home_text: ".." # customize text for homepage link in post layout
-  date_format: "%Y-%m-%d" # customize how date is formatted
-  show_description: false # show blog description in home page
-
-sass:
-  style: :compressed
 
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.txt
+  - vendor
+  - scripts

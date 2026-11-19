@@ -1,14 +1,84 @@
 ---
 layout: default
 ---
-<header>
-  <h1>{{ site.title }}</h1>
-  <h2>{{ site.author }}</h2>
-  {%-if site.theme_config.show_description-%}
-    <p>{{ site.description }}</p>
-  {%-endif-%}
+{%- assign pubs = site.data.publications -%}
+{%- assign cv = site.data.cv -%}
+
+<header class="hero">
+  <img class="headshot" src="{{ '/assets/img/headshot.webp' | relative_url }}" alt="Carter J. Wilson" width="673" height="673">
+  <div class="hero-text">
+    <p class="eyebrow">Computational biophysics · MPI-NAT Göttingen</p>
+    <h1>{{ site.author }}</h1>
+    <p class="lede">I develop alchemical free energy methods for the covalent chemistry of proteins (protonation, disulfide bonds and post-translational modifications) and apply them to aquaporins, disordered proteins and amyloid.</p>
+    <p class="muted">Postdoctoral researcher in <a href="https://www.mpinat.mpg.de/degroot">Bert de Groot's group</a> at the Max Planck Institute for Multidisciplinary Sciences. Next: combining computational PTM thermodynamics with cryo-EM of amyloid fibrils.</p>
+    <p class="actions">
+      <a class="btn btn-solid" href="{{ cv.cv_pdf | relative_url }}" download="carterjwilson_cv.pdf">Download CV</a>
+      <a class="btn" href="mailto:{{ site.email }}">Email</a>
+      <a class="btn" href="{{ cv.links[0].url }}">Scholar</a>
+    </p>
+  </div>
 </header>
 
-{%-include menu_item.html collection=site.data.menu.entries-%}
+<section id="research">
+  <h2>Research</h2>
+  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
+  <div class="themes">
+    {%- for t in themes -%}
+      {%- assign parts = t | split: "|" -%}
+      {%- assign tp = pubs | where: "theme", parts[0] -%}
+      <article class="theme theme-{{ parts[0] }}">
+        <h3>{{ parts[1] }}</h3>
+        <p>{{ parts[2] }}</p>
+        <ul>
+          {%- for p in tp limit: 3 -%}
+          <li><a href="https://doi.org/{{ p.doi }}">{{ p.title }}</a> <span class="muted">{{ p.year }}</span></li>
+          {%- endfor -%}
+        </ul>
+        <span class="count">{{ tp.size }} papers</span>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
 
-{{ content }}
+<section id="explainers">
+  <h2>Explainers</h2>
+  <a class="explainer" href="{{ '/amyloid/' | relative_url }}">
+    <div class="explainer-text">
+      <p class="eyebrow">Interactive · for non-scientists</p>
+      <h3>Amyloid, Up Close</h3>
+      <p>What the protein fibres behind Parkinson's and Alzheimer's look like, how they spread, and how cryo-EM photographs single molecules. Every 3D model is a real structure you can rotate.</p>
+      <span class="go">Open the explainer →</span>
+    </div>
+    <svg class="fibril" viewBox="0 0 320 220" role="img" aria-label="Sketch of stacked protein strands in an amyloid fibril">
+      {%- for i in (0..9) -%}
+        {%- assign y = i | times: 18 | plus: 16 -%}
+        <polyline class="{% if i == 0 %}strand-hi{% else %}strand{% endif %}" points="30,{{ y }} 60,{{ y | plus: 7 }} 95,{{ y }} 130,{{ y | plus: 7 }} 160,{{ y }} 190,{{ y | plus: 7 }} 225,{{ y }} 260,{{ y | plus: 7 }} 290,{{ y }}"/>
+      {%- endfor -%}
+      <path class="dim" d="M300 19.5h8M304 19.5v18M300 37.5h8"/>
+      <text class="dim-label" x="290" y="214" text-anchor="end">one layer = one protein · 0.48 nm apart</text>
+    </svg>
+  </a>
+</section>
+
+<section id="publications">
+  <h2>Publications</h2>
+  <p class="muted small"><b>Bold</b>: me. * equal contribution.</p>
+  <ol class="pubs">
+    {%- for p in pubs -%}{%- include pub.html pub=p -%}{%- endfor -%}
+  </ol>
+</section>
+
+<section id="cv">
+  <h2>Background</h2>
+  <dl class="timeline">
+    {%- assign rows = cv.positions | concat: cv.education -%}
+    {%- for r in rows -%}
+      <dt>{{ r.when }}</dt>
+      <dd><b>{{ r.what }}</b><br>{{ r.where }}{% if r.detail %}<br><span class="muted">{{ r.detail }}</span>{% endif %}</dd>
+    {%- endfor -%}
+  </dl>
+  <details class="awards">
+    <summary>Awards and scholarships ({{ cv.awards.size }})</summary>
+    <ul>{%- for a in cv.awards -%}<li>{{ a }}</li>{%- endfor -%}</ul>
+  </details>
+</section>
