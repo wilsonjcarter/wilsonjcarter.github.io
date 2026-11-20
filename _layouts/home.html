@@ -21,7 +21,7 @@ layout: default
 
 <section id="research">
   <h2>Research</h2>
-  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.|/research/free-energy/;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.|/research/aquaporins/;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
+  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.|/research/free-energy/;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.|/research/aquaporins/;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein.|/research/amyloid/" | split: ";" -%}
   <div class="themes">
     {%- for t in themes -%}
       {%- assign parts = t | split: "|" -%}
@@ -47,22 +47,7 @@ layout: default
 
 <section id="explainers">
   <h2>Explainers</h2>
-  <a class="explainer" href="{{ '/amyloid/' | relative_url }}">
-    <div class="explainer-text">
-      <p class="eyebrow">Interactive · for non-scientists</p>
-      <h3>Amyloid, Up Close</h3>
-      <p>What the protein fibres behind Parkinson's and Alzheimer's look like, how they spread, and how cryo-EM photographs single molecules. Every 3D model is a real structure you can rotate.</p>
-      <span class="go">Open the explainer →</span>
-    </div>
-    <svg class="fibril" viewBox="0 0 320 220" role="img" aria-label="Sketch of stacked protein strands in an amyloid fibril">
-      {%- for i in (0..9) -%}
-        {%- assign y = i | times: 18 | plus: 16 -%}
-        <polyline class="{% if i == 0 %}strand-hi{% else %}strand{% endif %}" points="30,{{ y }} 60,{{ y | plus: 7 }} 95,{{ y }} 130,{{ y | plus: 7 }} 160,{{ y }} 190,{{ y | plus: 7 }} 225,{{ y }} 260,{{ y | plus: 7 }} 290,{{ y }}"/>
-      {%- endfor -%}
-      <path class="dim" d="M300 19.5h8M304 19.5v18M300 37.5h8"/>
-      <text class="dim-label" x="290" y="214" text-anchor="end">one layer = one protein · 0.48 nm apart</text>
-    </svg>
-  </a>
+  {%- include amyloid_card.html -%}
 </section>
 
 <section id="publications">

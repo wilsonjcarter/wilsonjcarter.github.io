@@ -1,0 +1,48 @@
+---
+layout: research
+title: Disorder and amyloid
+theme: disorder
+permalink: /research/amyloid/
+description: Disordered proteins and the amyloid fibrils they form, with an interactive map of α-synuclein.
+lede: Many proteins never settle into one shape. Intrinsically disordered proteins stay flexible, which lets them bind many partners, but some of them can also stack into amyloid fibrils, the hallmark of Parkinson’s and Alzheimer’s disease.
+script: /assets/js/amyloid.js
+---
+
+<section class="prose">
+  <h2>One protein, three regions</h2>
+  <p><b>α-Synuclein</b> is a small protein of 140 amino acids, abundant at nerve endings and the main component of the clumps found in the brains of people with Parkinson’s disease. On its own in solution it is disordered, but its sequence has three distinct parts, and each behaves differently.</p>
+</section>
+
+<figure class="fig" id="asyn">
+  <div class="chips" role="group" aria-label="Colour by">
+    <button type="button" data-mode="regions" aria-pressed="true">Regions</button>
+    <button type="button" data-mode="charge" aria-pressed="false">Charge</button>
+    <button type="button" data-mode="core" aria-pressed="false">Fibril core</button>
+  </div>
+  <div class="seq" role="img" aria-label="The 140 residues of α-synuclein"></div>
+  <div class="legend" aria-hidden="true"></div>
+  <div class="controls ph-control">
+    <label><span>pH <output data-out="ph">7.2</output></span>
+      <input type="range" data-in="ph" min="3" max="9" step="0.1" value="7.2"></label>
+    <div class="fig-buttons" role="group" aria-label="pH presets">
+      <button type="button" data-ph="7.2">Cytosol, pH 7.2</button>
+      <button type="button" data-ph="4.5">Lysosome, pH ~4.5</button>
+    </div>
+  </div>
+  <p class="readout" aria-live="polite"></p>
+  <figcaption>Human α-synuclein (UniProt P37840), one square per amino acid. Tap a square for details. Charges use approximate pKa values for exposed residues, so they ignore the shifts discussed on the <a href="{{ '/research/free-energy/' | relative_url }}">free energy page</a>. The fibril core is from PDB <a href="https://www.rcsb.org/structure/6CU7">6CU7</a> (Li et al., 2018); other fibril forms use slightly different stretches.</figcaption>
+</figure>
+
+<section class="prose">
+  <p>Lowering the pH, as inside lysosomes, neutralises much of the acidic tail and removes some of the charge that keeps α-synuclein molecules apart. Acidic conditions are known to speed up its aggregation.</p>
+
+  <h2>Chaperones that make things worse</h2>
+  <p>Cells have chaperones to keep proteins like this in check, but they do not always help. The co-chaperone STIP1/HOP binds two motifs in α-synuclein’s acidic tail. Instead of preventing aggregation, it holds α-synuclein back from forming fibrils and pushes it towards amorphous, high-molecular-weight species that are more toxic to neurons.</p>
+
+  <h2>From disorder to a fibril</h2>
+  <p>What those fibrils look like, how they spread from cell to cell and how cryo-EM resolves them is the subject of a separate, longer explainer:</p>
+</section>
+
+<section class="research-explainer">
+  {%- include amyloid_card.html -%}
+</section>
