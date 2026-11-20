@@ -21,20 +21,25 @@ layout: default
 
 <section id="research">
   <h2>Research</h2>
-  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
+  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.|/research/free-energy/;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
   <div class="themes">
     {%- for t in themes -%}
       {%- assign parts = t | split: "|" -%}
       {%- assign tp = pubs | where: "theme", parts[0] -%}
       <article class="theme theme-{{ parts[0] }}">
-        <h3>{{ parts[1] }}</h3>
+        {%- assign url = parts[3] -%}
+        <h3>{% if url %}<a href="{{ url | relative_url }}">{{ parts[1] }}</a>{% else %}{{ parts[1] }}{% endif %}</h3>
         <p>{{ parts[2] }}</p>
         <ul>
           {%- for p in tp limit: 3 -%}
           <li><a href="https://doi.org/{{ p.doi }}">{{ p.title }}</a> <span class="muted">{{ p.year }}</span></li>
           {%- endfor -%}
         </ul>
+        {%- if url -%}
+        <a class="more" href="{{ url | relative_url }}">Explore, with interactive figures →</a>
+        {%- else -%}
         <span class="count">{{ tp.size }} papers</span>
+        {%- endif -%}
       </article>
     {%- endfor -%}
   </div>

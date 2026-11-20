@@ -1,0 +1,89 @@
+---
+layout: research
+title: Free energy methods
+theme: methods
+permalink: /research/free-energy/
+description: How alchemical free energy calculations predict when a protein residue gains or loses a proton, with two interactive figures.
+lede: Whether a protein folds, binds a drug or opens a channel comes down to free energy differences. I compute them for the covalent chemistry of proteins, starting with the simplest change of all, a single proton.
+script: /assets/js/free-energy.js
+---
+
+<section class="prose">
+  <h2>One proton, a different protein</h2>
+  <p>Several amino acids carry a proton that comes and goes with pH. The pH at which a residue holds its proton half of the time is its <b>pKa</b>. Each residue type has its own typical value in water, from about 4 for aspartate and glutamate to about 10 for lysine and tyrosine. Inside a folded protein, the surroundings can shift that value by several units. A buried acid may stay protonated at neutral pH; a nearby charge can push the other way.</p>
+  <p>That one proton changes the charge of the protein, and with it stability, binding and, in aquaporins, whether the channel is open or closed.</p>
+</section>
+
+<figure class="fig" id="titration">
+  <div class="ti-grid">
+    <svg class="cartoon" viewBox="0 0 220 290" role="img" aria-label="Aspartate side chain in water and inside a protein; the proton fades as it is lost"></svg>
+    <svg class="plot" viewBox="0 0 640 300" role="img" aria-label="Fraction of aspartate protonated against pH, in water and inside a protein"></svg>
+  </div>
+  <div class="controls">
+    <label><span>pH <output data-out="ph">7.4</output></span>
+      <input type="range" data-in="ph" min="0" max="14" step="0.1" value="7.4"></label>
+    <label><span>Shift inside the protein <output data-out="shift">+3.0</output></span>
+      <input type="range" data-in="shift" min="-5" max="5" step="0.1" value="3"></label>
+  </div>
+  <p class="readout" aria-live="polite"></p>
+  <figcaption>How often an aspartate carries its proton, in water (dashed) and inside a protein (solid). The water pKa (3.7) is approximate for an exposed aspartate; other residue types sit elsewhere on the pH scale. The shift is illustrative. Drag on the plot to change pH.</figcaption>
+</figure>
+
+<section class="prose">
+  <p>Every unit of pKa shift is a free energy difference of 5.7&nbsp;kJ/mol (1.4&nbsp;kcal/mol) at room temperature. A prediction that is useful to within one pKa unit has to get the free energy right to within a few kJ/mol.</p>
+
+  <h2>Two sulfurs, one bond</h2>
+  <p>Cysteine carries a thiol group (–SH). When two cysteines meet and are oxidised, their sulfurs join in a <b>disulfide bond</b>, a covalent staple across the chain. Whether it forms depends on the cell: the cytosol is reducing and keeps cysteines apart, while the endoplasmic reticulum and the space outside cells are oxidising enough for disulfides to form.</p>
+  <p>A disulfide stabilises a folded protein mostly by what it takes away from the unfolded one. Pinning two points of a floppy chain together removes many of the shapes it could otherwise adopt, and the longer the loop between the cysteines, the bigger that loss. A protein that holds the bond without strain gains that free energy as stability, which in turn makes the bond harder to reduce.</p>
+</section>
+
+<figure class="fig" id="disulfide">
+  <div class="chips" role="group" aria-label="Environment"></div>
+  <div class="dsb-grid">
+    <svg class="loop" viewBox="0 0 240 240" role="img" aria-label="Protein chain forming a loop closed by a disulfide bond"></svg>
+    <svg class="plot" viewBox="0 0 420 260" role="img" aria-label="Fraction of disulfide formed against redox potential"></svg>
+  </div>
+  <div class="controls">
+    <label><span>Residues between the cysteines <output data-out="n">12</output></span>
+      <input type="range" data-in="n" min="3" max="80" step="1" value="12"></label>
+    <label><span>Redox potential <output data-out="e">−230 mV</output></span>
+      <input type="range" data-in="e" min="-400" max="-50" step="5" value="-230"></label>
+  </div>
+  <p class="readout" aria-live="polite"></p>
+  <figcaption>How much of the disulfide is formed as the surroundings get more oxidising (to the right), for a bond that gets no help from the fold (dashed) and one held by a folded protein (solid). The stabilisation is the loop-entropy estimate of Pace et al. (1988), assuming no strain; the reference potential and the environment values are approximate.</figcaption>
+</figure>
+
+<section class="prose">
+  <p>Real disulfides are rarely that simple: the bond can strain the fold, and the protein can favour or resist it in ways a loop-length formula cannot see. Getting those numbers for a particular protein is another job for alchemical free energy calculations.</p>
+
+  <h2>Computing it with alchemy</h2>
+  <p>Simulating the proton actually leaving would need quantum chemistry and far more sampling than is practical. Alchemical methods take a shortcut: a parameter <b>λ</b> turns the residue from one form into the other inside the simulation, fading the proton into a non-interacting “dummy” atom and moving the charges to the deprotonated form. Doing this once in water and once in the protein closes a thermodynamic cycle:</p>
+
+  <div class="cycle" role="img" aria-label="Thermodynamic cycle: the pKa shift equals the difference between the protein and water free energies, divided by RT ln 10">
+    <span class="cy-env">water</span><span class="cy-a">AH</span><span class="cy-arrow">ΔG<sub>water</sub> →</span><span class="cy-b">A⁻</span>
+    <span class="cy-env">protein</span><span class="cy-a">AH</span><span class="cy-arrow">ΔG<sub>protein</sub> →</span><span class="cy-b">A⁻</span>
+    <span class="cy-eq">ΔpKa = (ΔG<sub>protein</sub> − ΔG<sub>water</sub>) / RT ln 10</span>
+  </div>
+
+  <p>I use non-equilibrium switching, as implemented in <a href="https://github.com/deGrootLab/pmx">pmx</a>. Instead of moving λ slowly, many short simulations sweep it from 0 to 1 and back, each recording the work it took. Fast switching wastes some energy, so forward runs overshoot the free energy and reverse runs undershoot it. Crooks’ theorem says the true value sits where the two work distributions cross, and the Bennett acceptance ratio estimates it from both sets of runs.</p>
+</section>
+
+<figure class="fig" id="crooks">
+  <div class="crooks-grid">
+    <div class="morph">
+      <svg viewBox="0 0 240 170" role="img" aria-label="Carboxylic acid group; the proton fades into a dummy atom as lambda goes from 0 to 1"></svg>
+      <label><span>λ <output data-out="lam">0.00</output></span>
+        <input type="range" data-in="lam" min="0" max="1" step="0.01" value="0"></label>
+      <p class="small muted lam-note">λ = 0: protonated, neutral</p>
+    </div>
+    <div class="work">
+      <svg viewBox="0 0 420 230" role="img" aria-label="Histograms of forward and reverse work values"></svg>
+      <div class="fig-buttons">
+        <button type="button" data-act="run">Run 20 switches each way</button>
+        <button type="button" data-act="reset">Reset</button>
+      </div>
+      <p class="readout" aria-live="polite"></p>
+    </div>
+  </div>
+  <figcaption>A toy version with made-up numbers: work values are drawn at random around a hidden free energy. Forward work (λ 0→1) in blue, reverse work (λ 1→0, sign flipped) in orange. Run more switches and watch the estimate settle.</figcaption>
+</figure>

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+{%- assign tp = site.data.publications | where: "theme", page.theme -%}
+<article class="research theme-{{ page.theme }}">
+  <p class="eyebrow"><a href="{{ '/#research' | relative_url }}">← Research</a></p>
+  <h1>{{ page.title }}</h1>
+  {%- if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+
+  {{ content }}
+
+  <section class="research-papers">
+    <h2>Papers</h2>
+    <p class="muted small"><b>Bold</b>: me. * equal contribution.</p>
+    <ol class="pubs">
+      {%- for p in tp -%}{%- include pub.html pub=p -%}{%- endfor -%}
+    </ol>
+  </section>
+</article>
+{%- if page.script %}<script src="{{ page.script | relative_url }}" defer></script>{% endif %}
