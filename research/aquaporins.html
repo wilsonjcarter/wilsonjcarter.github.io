@@ -1,0 +1,57 @@
+---
+layout: research
+title: Aquaporins
+theme: aquaporins
+permalink: /research/aquaporins/
+description: How human aquaporins open, close and get blocked, shown on cryo-EM structures you can rotate.
+lede: Aquaporins are the cell’s water channels. Each one is four pores packed side by side, and each pore lets molecules through in single file. I study how human aquaporins open, close and get blocked.
+scripts:
+  - https://cdn.jsdelivr.net/npm/3dmol@2.4.2/build/3Dmol-min.js
+script: /assets/js/aquaporins.js
+---
+
+<section class="prose">
+  <h2>Four pores in one protein</h2>
+  <p>Aquaporins sit in the cell membrane as tetramers: four identical subunits, each folded around its own narrow pore. Two short loops carrying the amino acids asparagine–proline–alanine (the <b>NPA motifs</b>) meet in the middle of each pore, and a tight constriction near the outside decides what fits through.</p>
+  <p>Most aquaporins pass only water. The <b>aquaglyceroporins</b>, including AQP3 and AQP7, also let through glycerol and, in the case of AQP3, hydrogen peroxide (H<sub>2</sub>O<sub>2</sub>), a molecule cells use as a signal but also have to keep in check.</p>
+
+  <h2>A channel that closes itself</h2>
+  <p>Cryo-EM structures of human AQP3 show the channel open at pH 8.0 and closed at acidic pH or after exposure to H<sub>2</sub>O<sub>2</sub>. Closing happens through a large rearrangement of <b>loop E</b> on the outside of the channel. Because H<sub>2</sub>O<sub>2</sub> itself shuts the channel that carries it, AQP3 can limit its own traffic.</p>
+</section>
+
+<figure class="fig mol-fig" id="aqp3">
+  <div class="chips" role="group" aria-label="Structure">
+    <button type="button" data-state="ph8" aria-pressed="true">pH 8.0</button>
+    <button type="button" data-state="ph5" aria-pressed="false">pH 5.5</button>
+    <button type="button" data-state="h2o2" aria-pressed="false">pH 8.0 + H₂O₂</button>
+  </div>
+  <div class="viewer-wrap">
+    <div class="viewer" aria-label="3D model of the AQP3 tetramer"></div>
+    <span class="side-label top">outside the cell</span>
+    <span class="side-label bottom">inside the cell</span>
+    <p class="viewer-status" aria-live="polite"></p>
+  </div>
+  <div class="fig-buttons" role="group" aria-label="View">
+    <button type="button" data-view="side" aria-pressed="true">Side view</button>
+    <button type="button" data-view="top" aria-pressed="false">From outside the cell</button>
+  </div>
+  <figcaption>Human AQP3, all four subunits. <span class="key key-e"></span>Loop E (residues 207–212) and <span class="key key-d"></span>a stretch on the cytoplasmic side (185–189) are the parts that move most between structures, 4–8&nbsp;Å; the rest barely changes. Drag to rotate, scroll or pinch to zoom. Structures: PDB <a href="https://www.rcsb.org/structure/9QSX">9QSX</a>, <a href="https://www.rcsb.org/structure/9QSY">9QSY</a>, <a href="https://www.rcsb.org/structure/9QSZ">9QSZ</a>.</figcaption>
+</figure>
+
+<section class="prose">
+  <h2>Blocking a pore from the inside</h2>
+  <p>Aquaporins turn up in cancer: their levels track tumour growth, cell migration and patient survival, which makes them possible drug targets. Yet few compounds are known to block a specific human aquaporin. A cryo-EM structure of AQP7 with the inhibitor Z433927330, combined with molecular dynamics simulations, shows where it binds: on the inner, cytoplasmic side of each pore. Cancer cells treated with it grow more slowly.</p>
+</section>
+
+<figure class="fig mol-fig" id="aqp7">
+  <div class="viewer-wrap">
+    <div class="viewer" aria-label="3D model of AQP7 with an inhibitor bound in each subunit"></div>
+    <span class="side-label top">outside the cell</span>
+    <span class="side-label bottom">inside the cell</span>
+  </div>
+  <div class="fig-buttons" role="group" aria-label="View">
+    <button type="button" data-view="side" aria-pressed="true">Side view</button>
+    <button type="button" data-view="bottom" aria-pressed="false">From inside the cell</button>
+  </div>
+  <figcaption>Human AQP7 with <span class="key key-inh"></span>the inhibitor Z433927330 in each of its four subunits, and the side chains that touch it. Structure: PDB <a href="https://www.rcsb.org/structure/8C9H">8C9H</a>.</figcaption>
+</figure>

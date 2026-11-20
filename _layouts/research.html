@@ -17,4 +17,5 @@ layout: default
     </ol>
   </section>
 </article>
+{%- for src in page.scripts %}<script src="{{ src }}" defer></script>{% endfor %}
 {%- if page.script %}<script src="{{ page.script | relative_url }}" defer></script>{% endif %}

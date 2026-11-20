@@ -21,7 +21,7 @@ layout: default
 
 <section id="research">
   <h2>Research</h2>
-  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.|/research/free-energy/;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
+  {%- assign themes = "methods|Free energy methods|Protonation states, pKa values and protein design with non-equilibrium alchemy (pmx). Making relative free energies quantitative enough to use on real proteins.|/research/free-energy/;aquaporins|Aquaporins|How human aquaporins open, close and get inhibited, simulated alongside cryo-EM and crystal structures from our collaborators.|/research/aquaporins/;disorder|Disorder and amyloid|Disordered proteins and the aggregates they form in neurodegeneration, from Nrf2 and Matrin3 to α-synuclein." | split: ";" -%}
   <div class="themes">
     {%- for t in themes -%}
       {%- assign parts = t | split: "|" -%}
